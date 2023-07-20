@@ -1,12 +1,9 @@
-import { useState } from 'react'
-import Layout from './ui/layout/Layout'
+import {RouterProvider} from 'react-router-dom'
+import router from './routes'
 
 function App() {
-
   return (
-    <>
-    <Layout></Layout>
-    </>
+    <RouterProvider router={router}></RouterProvider>
   )
 }
 
