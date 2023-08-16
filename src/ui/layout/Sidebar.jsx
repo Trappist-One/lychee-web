@@ -12,7 +12,12 @@ export default function Silder() {
         ></img>
       </div>
       <div className=" w-4/5 h-[2px] bg-red-200 mx-auto"></div>
-      <div></div>
+      <div className=" flex h-full">
+        <div className=" bg-orange-300  w-1/2 h-full">
+        </div>
+
+        <div className=" bg-blue-400 w-1/2   h-full"></div>
+      </div>
     </div>
   );
 }

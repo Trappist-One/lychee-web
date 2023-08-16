@@ -3,7 +3,7 @@ import router from './routes'
 
 function App() {
   return (
-    <div className='overflow-y-scroll no-scrollbar h-screen w-screen'>
+    <div className='overflow-y-scroll no-scrollbar h-screen w-full min-w-full'>
       <RouterProvider router={router}></RouterProvider>
     </div>
   )
