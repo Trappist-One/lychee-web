@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { menuDataList } from "./data";
 
 export default function Silder() {
   const [open, setOpen] = useState(true);
@@ -12,12 +13,38 @@ export default function Silder() {
         ></img>
       </div>
       <div className=" w-4/5 h-[2px] bg-red-200 mx-auto"></div>
-      <div className=" flex h-full">
-        <div className=" bg-orange-300  w-1/2 h-full">
-        </div>
-
-        <div className=" bg-blue-400 w-1/2   h-full"></div>
-      </div>
+      <MenuList></MenuList>
     </div>
   );
 }
+
+const MenuList = () => {
+  const subMenuDataList = menuDataList[0].chridList;
+
+  return (
+    <div className="w-[208px] flex bg-yellow-100 h-screen">
+      <div className="w-[104px] flex flex-col">
+        <ul>
+          {menuDataList.map((menuData) => {
+            return (
+              <li key={menuData.id} menuId={menuData.id}>
+                {menuData.menuName}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="w-[104px] flex flex-col bg-blue-200 h-screen">
+        <ul>
+          {subMenuDataList.map((menuData) => {
+            return (
+              <li key={menuData.id} menuId={menuData.id}>
+                {menuData.menuName}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  );
+};
