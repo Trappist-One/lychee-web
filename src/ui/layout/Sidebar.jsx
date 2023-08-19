@@ -19,7 +19,15 @@ export default function Silder() {
 }
 
 const MenuList = () => {
-  const subMenuDataList = menuDataList[0].chridList;
+  const [subMenuDataList, setSubMenuDataList] = useState(
+    menuDataList[0]?.chridList
+  );
+
+  const checkMenuFun = (menuId) => {
+    setSubMenuDataList(
+      menuDataList.filter((menuData) => menuData.id == menuId)[0].chridList
+    );
+  };
 
   return (
     <div className="w-[208px] flex bg-yellow-100 h-screen">
@@ -27,7 +35,11 @@ const MenuList = () => {
         <ul>
           {menuDataList.map((menuData) => {
             return (
-              <li key={menuData.id} menuId={menuData.id}>
+              <li
+                key={menuData.id}
+                className=" w-full px-2 py-1 cursor-pointer"
+                onClick={() => checkMenuFun(menuData.id)}
+              >
                 {menuData.menuName}
               </li>
             );
@@ -37,11 +49,11 @@ const MenuList = () => {
       <div className="w-[104px] flex flex-col bg-blue-200 h-screen">
         <ul>
           {subMenuDataList.map((menuData) => {
-            return (
-              <li key={menuData.id} menuId={menuData.id}>
-                {menuData.menuName}
-              </li>
-            );
+            if (menuData.title == true) {
+              return <li key={menuData.id} className=" text-blue-300">{menuData.menuName}</li>;
+            } else {
+              return <li key={menuData.id} className="cursor-pointer">{menuData.menuName}</li>;
+            }
           })}
         </ul>
       </div>
