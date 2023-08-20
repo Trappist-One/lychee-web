@@ -38,7 +38,7 @@ const MenuList = (prop) => {
             return (
               <li
                 key={menuData.id}
-                className="px-4 py-2 cursor-pointer"
+                className="px-4 pt-4 cursor-pointer"
                 onClick={() => checkMenuFun(menuData.id)}
               >
                 {menuData.menuName}
@@ -51,9 +51,9 @@ const MenuList = (prop) => {
         <ul>
           {subMenuDataList.map((menuData) => {
             if (menuData.title == true) {
-              return <li key={menuData.id} className="px-4 py-2 text-blue-300">{menuData.menuName}</li>;
+              return <li key={menuData.id} className="px-4 pt-4 text-blue-300">{menuData.menuName}</li>;
             } else {
-              return <li key={menuData.id} className="px-4 py-2 cursor-pointer">{menuData.menuName}</li>;
+              return <li key={menuData.id} className="px-4 pt-4 cursor-pointer">{menuData.menuName}</li>;
             }
           })}
         </ul>
