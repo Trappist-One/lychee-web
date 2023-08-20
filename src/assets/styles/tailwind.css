@@ -1,9 +1,9 @@
+@import url('https://fonts.font.im/css?family=Roboto');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* @import url('https://fonts.font.im/css?family=Roboto'); */
-
 
 @layer utilities {
     @variants responsive {
