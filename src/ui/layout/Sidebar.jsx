@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { menuDataList } from "./data";
+import { C } from "./Layout";
 
 export default function Silder() {
-  const [open, setOpen] = useState(true);
-  const [showSub, setShowSub] = useState(true);
-  const width = showSub ? " w-[180px]" : " w-[90px]";
-
+  const {expand, setExpand} = useContext(C)
+  const width = expand ? " w-[180px]" : " w-[90px]";
+  console.log('Silder='+ expand);
   return (
-    <div className={"h-full shadow-md bg-white flex flex-col" + width}>
+    <div className={"h-full shadow-md bg-white flex flex-col " + width}>
       <div className=" h-10 bg-white">
         <img
           className="h-10 w-8 m-auto"
@@ -17,8 +17,8 @@ export default function Silder() {
       <div className=" w-4/5 h-[2px] bg-red-200 mx-auto"></div>
       <MenuList
         dataList={menuDataList}
-        showSub={showSub}
-        setShowSub={setShowSub}
+        showSub={expand}
+        setExpand={setExpand}
       ></MenuList>
     </div>
   );
@@ -31,17 +31,15 @@ const MenuList = (prop) => {
   );
 
   const checkMenuFun = (menuId) => {
+    prop.setExpand(true)
     setSubMenuDataList(
       dataList.filter((menuData) => menuData.id == menuId)[0].chridList
     );
-    if (!prop.showSub) {
-      prop.setShowSub(true);
-    }
   };
 
   return (
     <div className="w-[180px] flex h-screen text-xs">
-      <div className="w-[90px] max-w-[90px] flex flex-col shadow-lg">
+      <div className="w-[90px] flex flex-col shadow-lg">
         <ul>
           {dataList.map((menuData) => {
             return (
@@ -59,7 +57,7 @@ const MenuList = (prop) => {
 
       <div
         className={
-          "w-[90px] max-w-[90px] flex flex-col h-screen" + prop.showSub ? "" : " hidden"
+          "w-[90px] flex flex-col h-screen"
         }
       >
         <ul>

@@ -1,18 +1,20 @@
 import { Avatar, Popper, Fade, IconButton } from "@mui/material";
 import { Settings } from "@mui/icons-material";
+import { C } from "./Layout";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const {expand, setExpand} = useContext(C)
+  console.log("Header=" + expand);
   const [placement, setPlacement] = useState();
   const handleClick = (newPlacement) => (event) => {
-    console.log(event.currentTarget);
     setAnchorEl(event.currentTarget);
     setOpen((prev) => placement !== newPlacement || !prev);
     setPlacement(newPlacement);
+    setExpand(!expand)
   };
 
   const canBeOpen = open && Boolean(anchorEl);
