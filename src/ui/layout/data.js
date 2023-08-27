@@ -1,71 +1,71 @@
 const menuDataList = [{
-    "menuName": "系统设置",
+    "name": "系统设置",
     "id": 1,
     "chridList": [
       {
-        "menuName": "测试标题",
+        "name": "测试标题",
         "id":11,
         "title":true
       },
       {
-        "menuName": "测试菜单1",
+        "name": "测试菜单1",
         "id":111,
         "title":false
       },
       {
-        "menuName": "测试菜单2",
+        "name": "测试菜单2",
         "id":112,
         "title":false
       },
       {
-        "menuName": "测试标题2",
-        "id":21,
+        "name": "测试标题2",
+        "id":12,
         "title":true
       },
       {
-        "menuName": "测试菜单2",
-        "id":211,
+        "name": "测试菜单2",
+        "id":121,
         "title":false
       },
       {
-        "menuName": "测试菜单2",
-        "id":212,
+        "name": "测试菜单2",
+        "id":122,
         "title":false
       }
     ]
   },
   {
-    "menuName": "菜单2",
+    "name": "菜单2",
     "id": 2,
     "chridList": [
       {
-        "menuName": "测试标题",
-        "id":11,
-        "title":true
-      },
-      {
-        "menuName": "测试菜单1",
-        "id":111,
-        "title":false
-      },
-      {
-        "menuName": "测试菜单2",
-        "id":112,
-        "title":false
-      },
-      {
-        "menuName": "测试标题2",
+        "name": "测试标题",
         "id":21,
         "title":true
       },
       {
-        "menuName": "测试菜单211",
+        "name": "测试菜单1",
         "id":211,
         "title":false
       },
       {
-        "menuName": "测试菜单212",
+        "name": "测试菜单2",
         "id":212,
+        "title":false
+      },
+      {
+        "name": "测试标题2",
+        "id":22,
+        "title":true
+      },
+      {
+        "name": "测试菜单211",
+        "id":221,
+        "title":false
+      },
+      {
+        "name": "测试菜单212",
+        "id":222,
         "title":false
       }
     ]
