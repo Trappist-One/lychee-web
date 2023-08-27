@@ -23,20 +23,30 @@ export default function Layout() {
   );
 }
 
-const ConfigProvider = ({children}) => {
-    console.log('ConfigProvider');
+const ConfigProvider = ({ children }) => {
   const [expand, setExpand] = useState(true);
+  const [activeMenuId, setActiveMenuId] = useState(0);
   const [tabs, setTabs] = useState([
     {
       name: "首页",
       path: "/",
-      id: 0
-    }
-  ])
+      id: 0,
+    },
+  ]);
   return (
-    <C.Provider value={{ expand, setExpand, tabs, setTabs}}>{children}</C.Provider>
-  )
-  
+    <C.Provider
+      value={{
+        expand,
+        setExpand,
+        tabs,
+        setTabs,
+        activeMenuId,
+        setActiveMenuId,
+      }}
+    >
+      {children}
+    </C.Provider>
+  );
 };
 
 export { C };
