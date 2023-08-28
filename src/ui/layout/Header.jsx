@@ -1,8 +1,8 @@
-import { Avatar, Popper, Fade, IconButton } from "@mui/material";
+import { Avatar, Popper, Fade, IconButton, Drawer, Box } from "@mui/material";
 import { Expand, Settings } from "@mui/icons-material";
 import { C } from "./Layout";
 
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,19 @@ export default function Header() {
 
   const expandFun = () => {
     setExpand(!expand);
-  }
+  };
+
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setOpenDrawer(open);
+  };
 
   const canBeOpen = open && Boolean(anchorEl);
   const id = canBeOpen ? "transition-popper" : undefined;
@@ -28,13 +40,17 @@ export default function Header() {
       <div className="h-12 shadow-md bg-white w-full p-2 flex ">
         <div className=" bg-red-300 w-full h-full flex justify-between items-center">
           <div>
-            <IconButton aria-label="delete" size="small" onClick={  expandFun}>
+            <IconButton aria-label="delete" size="small" onClick={expandFun}>
               <Expand />
             </IconButton>
           </div>
           <div>
             <div className="w-full h-full flex items-center justify-end gap-x-2">
-              <IconButton aria-label="delete" size="small">
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={toggleDrawer(true)}
+              >
                 <Settings />
               </IconButton>
               <label
@@ -61,6 +77,18 @@ export default function Header() {
                   </Fade>
                 )}
               </Popper>
+
+              <Fragment key="settingDrawer">
+                <Drawer
+                  anchor="right"
+                  open={openDrawer}
+                  onClose={toggleDrawer(false)}
+                >
+                  <Box>
+                    <div>111</div>
+                  </Box>
+                </Drawer>
+              </Fragment>
             </div>
           </div>
         </div>

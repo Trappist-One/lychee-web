@@ -46,7 +46,7 @@ export default function Breadcrumb() {
 const Tab = (prop) => {
   const statusColor = prop.active ? "bg-red-400" : "bg-white";
   return (
-    <div className=" w-auto h-full p-1 shadow-md bg-green-600 flex items-center justify-between rounded-sm min-w-min">
+    <div className=" w-auto h-6 p-1 shadow-md bg-green-600 flex items-center justify-between rounded-sm min-w-min ">
       <span className={"w-3 h-3 rounded-full block " + statusColor}></span>
       <span
         className="text-cente block text-white cursor-pointer mx-2"
@@ -61,7 +61,7 @@ const Tab = (prop) => {
           className="block cursor-pointer"
           onClick={() => prop.removeTab(prop.data?.id)}
         >
-          <Close className="w-4 h-4 cursor-pointer" color="action"></Close>
+          <Close className="w-4 h-4 min-h-max min-w-full cursor-pointer" color="action"></Close>
         </span>
       )}
     </div>
