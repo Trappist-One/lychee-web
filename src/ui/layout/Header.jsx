@@ -2,13 +2,13 @@ import { Avatar, Popper, Fade, IconButton, Drawer, Box } from "@mui/material";
 import { Expand, Settings } from "@mui/icons-material";
 import { C } from "./Layout";
 
-import { Fragment, useContext, useState } from "react";
+import { useContext, useState } from "react";
+import SettingDrawer from "./SettingDrawer";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const { expand, setExpand } = useContext(C);
-  console.log("Header=" + expand);
   const [placement, setPlacement] = useState();
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
@@ -77,18 +77,7 @@ export default function Header() {
                   </Fade>
                 )}
               </Popper>
-
-              <Fragment key="settingDrawer">
-                <Drawer
-                  anchor="right"
-                  open={openDrawer}
-                  onClose={toggleDrawer(false)}
-                >
-                  <Box>
-                    <div>111</div>
-                  </Box>
-                </Drawer>
-              </Fragment>
+              <SettingDrawer open={openDrawer} setOpen={setOpenDrawer}></SettingDrawer>
             </div>
           </div>
         </div>
