@@ -2,11 +2,16 @@ import Header from "./Header";
 import Silder from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
-import { createContext, useState } from "react";
+import { createContext, useLayoutEffect, useState } from "react";
 
 const C = createContext({});
 
 export default function Layout() {
+  useLayoutEffect(()=> {
+    let rootStyle = document.querySelector(':root')
+    let css = getComputedStyle(rootStyle)
+    console.log('rootStyle -- ' + css.item);
+  }, [])
   return (
     <>
       <ConfigProvider>

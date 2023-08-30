@@ -29,13 +29,27 @@ export default function SettingDrawer(prop) {
         <div className="w-52 py-5 px-3 h-full">
           <Divider flexItem>主题</Divider>
           <div className="w-full flex justify-center">
-            <Select onChange={handleChangeTheme} className=" h-10 w-3/5">
-              <MenuItem>1</MenuItem>
-              <MenuItem>2</MenuItem>
-            </Select>
+
           </div>
         </div>
       </Drawer>
     </Fragment>
   );
+}
+
+const themeBlock = (prop) => {
+  return (
+    <>
+    <div className=" h-3 w-3 p-1 grid grid-cols-4">
+      {prop.colorGroup.map(
+        color => {
+          return (
+          <>
+          <div className={"h-1/2 w-1/2 " + color}></div>
+          </>)
+        }
+      )}
+    </div>
+    </>
+  )
 }
