@@ -3,7 +3,7 @@ import { menuDataList } from "./data";
 import { C } from "./Layout";
 
 export default function Silder() {
-  const { expand, setExpand, tabs, setTabs } = useContext(C);
+  const { expand, setExpand, tabs, setTabs, setActiveMenuId } = useContext(C);
   const width = expand ? " w-[180px]" : " w-[90px]";
   return (
     <div className={"h-full shadow-md bg-white flex flex-col" + width}>
@@ -26,6 +26,8 @@ export default function Silder() {
 }
 
 const MenuList = (prop) => {
+  const {setActiveMenuId } = useContext(C);
+
   const clickSubMenu = (menuData) => {
     const exist = Array.from(prop.tabs).some((tab) => tab.id == menuData.id);
     if (exist) {
@@ -34,6 +36,7 @@ const MenuList = (prop) => {
       let newTabs = [...prop.tabs, menuData]
       prop.setTabs(newTabs);
     }
+    setActiveMenuId(menuData.id)
   };
 
   const dataList = prop.dataList;

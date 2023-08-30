@@ -14,12 +14,14 @@ export default function Breadcrumb() {
         }
         return tab.id != id;
       });
-      // 先往前，如果没有，则往后
-      if (idx >= existTabs.length) {
-        idx = idx -1;
-      } 
-      const nextMenuTab = existTabs.at(idx);
-      setActiveMenuId(nextMenuTab.id);
+      if (activeMenuId == id) {
+        // 先往前，如果没有，则往后
+        if (idx >= existTabs.length) {
+          idx = idx - 1;
+        }
+        const nextMenuTab = existTabs.at(idx);
+        setActiveMenuId(nextMenuTab.id);
+      }
 
       setTabs(existTabs);
     }
@@ -61,7 +63,10 @@ const Tab = (prop) => {
           className="block cursor-pointer"
           onClick={() => prop.removeTab(prop.data?.id)}
         >
-          <Close className="w-4 h-4 min-h-max min-w-full cursor-pointer" color="action"></Close>
+          <Close
+            className="w-4 h-4 min-h-max min-w-full cursor-pointer"
+            color="action"
+          ></Close>
         </span>
       )}
     </div>
