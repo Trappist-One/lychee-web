@@ -10,7 +10,7 @@ export default function Layout() {
   useLayoutEffect(()=> {
     let rootStyle = document.querySelector(':root')
     let css = getComputedStyle(rootStyle)
-    console.log('rootStyle -- ' + css.item);
+    console.log('rootStyle -- ' + css.item());
   }, [])
   return (
     <>
