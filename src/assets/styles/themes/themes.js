@@ -1,5 +1,6 @@
-export default {
-    "[data-theme=light]": {
+export default [{
+  // data-theme=light
+     "Light": {
       "primary": "#fecdd3",
       "secondary": "#99f6e4",
       "accent": "#7dd3fc",   
@@ -10,7 +11,7 @@ export default {
       "warning": "#fde047",       
       "error": "#fc4531",
     },
-    "[data-theme=black]": {
+    "Dark": {
       "primary": "#343232",
       "secondary": "#343232",
       "accent": "#343232",
@@ -21,4 +22,4 @@ export default {
       "warning": "#ffff00",
       "error": "#ff0000"
     }
-};
+}]
