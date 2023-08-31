@@ -2,18 +2,18 @@ import Header from "./Header";
 import Silder from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
-import { createContext, useLayoutEffect, useReducer, useState } from "react";
+import { createContext, useLayoutEffect, useReducer } from "react";
 
-import {LayoutContext, State} from "./LayoutContext";
+import { LayoutContext, State } from "./LayoutContext";
 
 const C = createContext({});
 
 export default function Layout() {
-  useLayoutEffect(()=> {
-    let rootStyle = document.querySelector(':root')
-    let css = getComputedStyle(rootStyle)
+  useLayoutEffect(() => {
+    let rootStyle = document.querySelector(":root");
+    let css = getComputedStyle(rootStyle);
     // console.log('rootStyle -- ' + css.item());
-  }, [])
+  }, []);
   return (
     <>
       <ConfigProvider>
@@ -31,12 +31,12 @@ export default function Layout() {
 }
 
 const ConfigProvider = ({ children }) => {
-  const[state, dispatch] = useReducer(State, LayoutContext)
+  const [state, dispatch] = useReducer(LayoutContext, State);
   return (
     <C.Provider
       value={{
-        state, 
-        dispatch
+        state,
+        dispatch,
       }}
     >
       {children}

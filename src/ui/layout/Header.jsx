@@ -1,4 +1,4 @@
-import { Avatar, Popper, Fade, IconButton, Drawer, Box } from "@mui/material";
+import { Avatar, Popper, Fade, IconButton } from "@mui/material";
 import { Expand, Settings } from "@mui/icons-material";
 import { C } from "./Layout";
 
@@ -26,6 +26,16 @@ export default function Header() {
   const canBeOpen = open && Boolean(anchorEl);
   const id = canBeOpen ? "transition-popper" : undefined;
 
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setOpenDrawer(open);
+  };
+  
   return (
     <>
       <div className="h-12 shadow-md bg-white w-full p-2 flex ">

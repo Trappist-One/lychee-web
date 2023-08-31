@@ -4,11 +4,10 @@ import { C } from "./Layout";
 
 export default function Breadcrumb() {
   const {state, dispatch} = useContext(C);
-
   const removeTab = (id) => {
     if (id != null) {
       let idx;
-      const existTabs = tabs.filter((tab, index) => {
+      const existTabs = state.tabs.filter((tab, index) => {
         if (tab.id == id) {
           idx = index;
         }
@@ -22,13 +21,13 @@ export default function Breadcrumb() {
         const nextMenuTab = existTabs.at(idx);
         dispatch({type: 'setActiveMenuId', val: nextMenuTab.id})
       }
-      dispatch({type:setTabs, val: existTabs})
+      dispatch({type: 'setTabs', val: existTabs})
     }
   };
   return (
     <div className="mt-1 h-8 w-full bg-white px-2 py-1">
       <div className=" flex text-xs gap-1">
-        {Array.from(tabs).map((tab) => {
+        {Array.from(state.tabs).map((tab) => {
           return (
             <Tab
               key={tab.id}
@@ -52,7 +51,7 @@ const Tab = (prop) => {
       <span className={"w-3 h-3 rounded-full block " + statusColor}></span>
       <span
         className="text-cente block text-white cursor-pointer mx-2"
-        onClick={() => dispatch({type: 'setActiveMenuId', val: data.id})}
+        onClick={() => dispatch({type: 'setActiveMenuId', val: prop.data.id})}
       >
         {prop.data.name}
       </span>
