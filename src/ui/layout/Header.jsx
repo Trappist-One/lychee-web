@@ -26,16 +26,6 @@ export default function Header() {
   const canBeOpen = open && Boolean(anchorEl);
   const id = canBeOpen ? "transition-popper" : undefined;
 
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setOpenDrawer(open);
-  };
-  
   return (
     <>
       <div className="h-12 shadow-md bg-white w-full p-2 flex ">
@@ -50,7 +40,7 @@ export default function Header() {
               <IconButton
                 aria-label="delete"
                 size="small"
-                onClick={toggleDrawer(true)}
+                onClick={() => setOpenDrawer(true)}
               >
                 <Settings />
               </IconButton>
