@@ -2,7 +2,9 @@ import Header from "./Header";
 import Silder from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
-import { createContext, useLayoutEffect, useState } from "react";
+import { createContext, useLayoutEffect, useReducer, useState } from "react";
+
+import {LayoutContext, State} from "./LayoutContext";
 
 const C = createContext({});
 
@@ -29,24 +31,12 @@ export default function Layout() {
 }
 
 const ConfigProvider = ({ children }) => {
-  const [expand, setExpand] = useState(true);
-  const [activeMenuId, setActiveMenuId] = useState(0);
-  const [tabs, setTabs] = useState([
-    {
-      name: "首页",
-      path: "/",
-      id: 0,
-    },
-  ]);
+  const[state, dispatch] = useReducer(State, LayoutContext)
   return (
     <C.Provider
       value={{
-        expand,
-        setExpand,
-        tabs,
-        setTabs,
-        activeMenuId,
-        setActiveMenuId,
+        state, 
+        dispatch
       }}
     >
       {children}

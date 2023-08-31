@@ -3,8 +3,9 @@ import { menuDataList } from "./data";
 import { C } from "./Layout";
 
 export default function Silder() {
-  const { expand, setExpand, tabs, setTabs, setActiveMenuId } = useContext(C);
-  const width = expand ? " w-[180px]" : " w-[90px]";
+  const { state, dispatch} = useContext(C);
+
+  const width = state.expand ? " w-[180px]" : " w-[90px]";
   return (
     <div className={"h-full shadow-md bg-white flex flex-col" + width}>
       <div className=" h-10 bg-white">
@@ -16,27 +17,25 @@ export default function Silder() {
       <div className=" w-4/5 h-[2px] bg-red-200 mx-auto"></div>
       <MenuList
         dataList={menuDataList}
-        showSub={expand}
-        setExpand={setExpand}
-        tabs={tabs}
-        setTabs={setTabs}
+        showSub={state.expand}
+        tabs={state.tabs}
       ></MenuList>
     </div>
   );
 }
 
 const MenuList = (prop) => {
-  const {setActiveMenuId } = useContext(C);
+  const { state, dispatch} = useContext(C);
 
   const clickSubMenu = (menuData) => {
     const exist = Array.from(prop.tabs).some((tab) => tab.id == menuData.id);
     if (exist) {
       //
     } else {
-      let newTabs = [...prop.tabs, menuData]
-      prop.setTabs(newTabs);
+      let newTabs = [...state.tabs, menuData]
+      dispatch({type: 'setTabs', val: newTabs})
     }
-    setActiveMenuId(menuData.id)
+    dispatch({type: 'setActiveMenuId', val:menuData.id})
   };
 
   const dataList = prop.dataList;
@@ -45,7 +44,7 @@ const MenuList = (prop) => {
   );
 
   const checkMenuFun = (menuId) => {
-    prop.setExpand(true);
+    dispatch({type:'setExpand', val: true})
     setSubMenuDataList(
       dataList.filter((menuData) => menuData.id == menuId)[0].chridList
     );

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { C } from "./Layout";
 
 export default function Breadcrumb() {
-  const { tabs, setTabs, activeMenuId, setActiveMenuId } = useContext(C);
+  const {state, dispatch} = useContext(C);
 
   const removeTab = (id) => {
     if (id != null) {
@@ -14,16 +14,15 @@ export default function Breadcrumb() {
         }
         return tab.id != id;
       });
-      if (activeMenuId == id) {
+      if (state.activeMenuId == id) {
         // 先往前，如果没有，则往后
         if (idx >= existTabs.length) {
           idx = idx - 1;
         }
         const nextMenuTab = existTabs.at(idx);
-        setActiveMenuId(nextMenuTab.id);
+        dispatch({type: 'setActiveMenuId', val: nextMenuTab.id})
       }
-
-      setTabs(existTabs);
+      dispatch({type:setTabs, val: existTabs})
     }
   };
   return (
@@ -35,8 +34,7 @@ export default function Breadcrumb() {
               key={tab.id}
               data={tab}
               removeTab={removeTab}
-              active={activeMenuId === tab.id}
-              setActiveMenuId={setActiveMenuId}
+              active={state.activeMenuId === tab.id}
             ></Tab>
           );
         })}
@@ -46,13 +44,15 @@ export default function Breadcrumb() {
 }
 
 const Tab = (prop) => {
+  const {dispatch} = useContext(C);
+
   const statusColor = prop.active ? "bg-red-400" : "bg-white";
   return (
     <div className=" w-auto h-6 p-1 shadow-md bg-green-600 flex items-center justify-between rounded-sm min-w-min ">
       <span className={"w-3 h-3 rounded-full block " + statusColor}></span>
       <span
         className="text-cente block text-white cursor-pointer mx-2"
-        onClick={() => prop.setActiveMenuId(prop.data.id)}
+        onClick={() => dispatch({type: 'setActiveMenuId', val: data.id})}
       >
         {prop.data.name}
       </span>

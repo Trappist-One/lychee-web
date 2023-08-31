@@ -8,7 +8,8 @@ import SettingDrawer from "./SettingDrawer";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { expand, setExpand } = useContext(C);
+  const { state, dispatch } = useContext(C);
+
   const [placement, setPlacement] = useState();
   const handleClick = (newPlacement) => (event) => {
     setAnchorEl(event.currentTarget);
@@ -17,20 +18,10 @@ export default function Header() {
   };
 
   const expandFun = () => {
-    setExpand(!expand);
+    dispatch({type:'setExpand', val: !state.expand})
   };
 
   const [openDrawer, setOpenDrawer] = useState(false);
-
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setOpenDrawer(open);
-  };
 
   const canBeOpen = open && Boolean(anchorEl);
   const id = canBeOpen ? "transition-popper" : undefined;
@@ -77,7 +68,9 @@ export default function Header() {
                   </Fade>
                 )}
               </Popper>
+
               <SettingDrawer open={openDrawer} setOpen={setOpenDrawer}></SettingDrawer>
+
             </div>
           </div>
         </div>
