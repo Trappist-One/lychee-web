@@ -2,7 +2,7 @@ import Header from "./Header";
 import Silder from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
-import { createContext, useLayoutEffect, useReducer } from "react";
+import { createContext, useLayoutEffect, useReducer, useEffect } from "react";
 
 import { LayoutContext, State } from "./LayoutContext";
 
