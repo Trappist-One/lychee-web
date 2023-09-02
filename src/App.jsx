@@ -12,10 +12,9 @@ function App() {
     }
     document.querySelector('html').setAttribute('data-theme', localStorage.getItem('theme'))
   }, [])
-
-
+  
   return (
-    <div className='overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee bg-ly-bg-color'>
+    <div className='overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee'>
       <RouterProvider router={router}></RouterProvider>
     </div>
   )

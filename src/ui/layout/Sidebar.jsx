@@ -8,13 +8,13 @@ export default function Silder() {
   const width = state.expand ? " w-[180px]" : " w-[90px]";
   return (
     <div className={"h-full shadow-md flex flex-col" + width}>
-      <div className=" h-10">
+      <div className="h-10">
         <img
           className="h-10 w-8 m-auto"
           src="../src/assets/icons/logo.svg"
         ></img>
       </div>
-      <div className=" w-4/5 h-[2px] bg-red-200 mx-auto"></div>
+      <div className=" w-4/5 h-[2px] bg-ly-bg-primary mx-auto"></div>
       <MenuList
         dataList={menuDataList}
         showSub={state.expand}
@@ -74,7 +74,7 @@ const MenuList = (prop) => {
           {subMenuDataList.map((menuData) => {
             if (menuData.title == true) {
               return (
-                <li key={menuData.id} className="px-4 pt-4 text-blue-300">
+                <li key={menuData.id} className="px-4 pt-4 text-ly-bg-accent">
                   {menuData.name}
                 </li>
               );

@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="h-12 shadow-md w-full p-2 flex ">
+      <div className="h-12 shadow-md-b w-full p-2 flex ">
         <div className="w-full h-full flex justify-between items-center">
           <div>
             <IconButton aria-label="delete" size="small" onClick={expandFun}>
