@@ -1,0 +1,11 @@
+[data-theme='light'] {
+    --ly-bg-color: #FFF;
+}
+
+[data-theme='dark'] {
+    --ly-bg-color: #151126;
+}
+
+body {
+    background-color: var(--ly-bg-color)
+}

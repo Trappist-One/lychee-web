@@ -17,7 +17,7 @@ export default function Layout() {
   return (
     <>
       <ConfigProvider>
-        <div className="bg-gray-100 h-full flex flex-row">
+        <div className="h-full flex flex-row">
           <Silder></Silder>
           <div className="flex flex-col w-full">
             <Header></Header>

@@ -7,8 +7,8 @@ export default function Silder() {
 
   const width = state.expand ? " w-[180px]" : " w-[90px]";
   return (
-    <div className={"h-full shadow-md bg-white flex flex-col" + width}>
-      <div className=" h-10 bg-white">
+    <div className={"h-full shadow-md flex flex-col" + width}>
+      <div className=" h-10">
         <img
           className="h-10 w-8 m-auto"
           src="../src/assets/icons/logo.svg"

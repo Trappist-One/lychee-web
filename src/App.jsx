@@ -15,7 +15,7 @@ function App() {
 
 
   return (
-    <div className='overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee'>
+    <div className='overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee bg-ly-bg-color'>
       <RouterProvider router={router}></RouterProvider>
     </div>
   )
