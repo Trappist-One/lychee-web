@@ -5,6 +5,7 @@ import Content from "./Content";
 import { createContext, useLayoutEffect, useReducer, useEffect } from "react";
 
 import { LayoutContext, State } from "./LayoutContext";
+import { Outlet, RouterProvider } from "react-router-dom";
 
 const C = createContext({});
 
@@ -22,7 +23,8 @@ export default function Layout() {
           <div className="flex flex-col w-full">
             <Header></Header>
             <Breadcrumb></Breadcrumb>
-            <Content></Content>
+            <Content>
+            </Content>
           </div>
         </div>
       </ConfigProvider>
