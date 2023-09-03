@@ -2,8 +2,14 @@ import { Divider, Drawer } from "@mui/material";
 import { Fragment, useContext } from "react";
 import themes from "@/assets/styles/themes/themes";
 import { C } from "./Layout";
+import LanguageSelect from "../components/LanguageSelect";
+import { useTranslation } from "react-i18next";
+// import {t} from 'i18next'
+
+
 export default function SettingDrawer(prop) {
   const { state, dispatch } = useContext(C);
+  const { t } = useTranslation();
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -25,7 +31,7 @@ export default function SettingDrawer(prop) {
       <Drawer anchor="right" open={prop.open} onClose={toggleDrawer(false)}>
         <div className="w-52 py-5 px-3 h-full flex flex-col gap-8">
           <div className="flex flex-col gap-2">
-            <Divider flexItem>主题</Divider>
+            <Divider flexItem>{t("主题")}</Divider>
             <div className="w-full flex justify-center gap-8">
               {themes.map((theme) => {
                 let colors = [];
@@ -50,17 +56,36 @@ export default function SettingDrawer(prop) {
               })}
             </div>
           </div>
-          <div>
-            <Divider flexItem>语言</Divider>
+          <div className="flex flex-col gap-2 items-center">
+            <Divider flexItem>{t("语言")}</Divider>
+            <LanguageSelect langs={langData} defLng = {state.lang}></LanguageSelect>
           </div>
           <div>
-            <Divider flexItem>其他</Divider>
+            <Divider flexItem>{t("其他")}</Divider>
           </div>
         </div>
       </Drawer>
     </Fragment>
   );
 }
+
+const langData = [
+  {
+      code: 'cn',
+      name: '中文',
+      i18n: 'zh-CN'
+  },
+  {
+      code: 'gb',
+      name: 'English',
+      i18n: 'en-US'
+  },
+  {
+      code: 'tw',
+      name: '中國台灣',
+      i18n: 'zh-tw'
+  },
+]
 
 const ThemeBlock = (prop) => {
   const checkedBorder = prop.checked ? " border-red-200" : " border-white";
