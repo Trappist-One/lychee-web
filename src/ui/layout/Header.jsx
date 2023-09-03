@@ -1,9 +1,18 @@
-import { Avatar, Popper, Fade, IconButton } from "@mui/material";
-import { Expand, Settings } from "@mui/icons-material";
+import {
+  Avatar,
+  Popper,
+  Fade,
+  IconButton,
+} from "@mui/material";
+import { Settings } from "@mui/icons-material";
 import { C } from "./Layout";
-
+import {
+  TbLayoutSidebarLeftCollapse,
+  TbLayoutSidebarRightCollapse,
+} from "react-icons/tb";
 import { useContext, useState } from "react";
 import SettingDrawer from "./SettingDrawer";
+import UserProfileList from "../components/UserProfileList";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -18,7 +27,7 @@ export default function Header() {
   };
 
   const expandFun = () => {
-    dispatch({type:'setExpand', val: !state.expand})
+    dispatch({ type: "setExpand", val: !state.expand });
   };
 
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -32,7 +41,11 @@ export default function Header() {
         <div className="w-full h-full flex justify-between items-center">
           <div>
             <IconButton aria-label="delete" size="small" onClick={expandFun}>
-              <Expand />
+              {state.expand ? (
+                <TbLayoutSidebarLeftCollapse size={24} color={"#666"} />
+              ) : (
+                <TbLayoutSidebarRightCollapse size={24} color={"#666"} />
+              )}
             </IconButton>
           </div>
           <div>
@@ -64,13 +77,17 @@ export default function Header() {
               >
                 {({ TransitionProps }) => (
                   <Fade {...TransitionProps}>
-                    <div>11</div>
+                    <div>
+                      <UserProfileList></UserProfileList>
+                    </div>
                   </Fade>
                 )}
               </Popper>
 
-              <SettingDrawer open={openDrawer} setOpen={setOpenDrawer}></SettingDrawer>
-
+              <SettingDrawer
+                open={openDrawer}
+                setOpen={setOpenDrawer}
+              ></SettingDrawer>
             </div>
           </div>
         </div>

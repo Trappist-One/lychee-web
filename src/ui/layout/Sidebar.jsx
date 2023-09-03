@@ -69,7 +69,7 @@ const MenuList = (prop) => {
         </ul>
       </div>
       {/* 子菜单 */}
-      <div className={"w-[90px] flex flex-col h-full"}>
+      <div className={"w-[90px] flex flex-col h-full" + (state.expand ? "" : " hidden")}>
         <ul>
           {subMenuDataList.map((menuData) => {
             if (menuData.title == true) {

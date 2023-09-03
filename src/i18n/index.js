@@ -23,7 +23,7 @@ i18n
   .init({
     fallbackLng: "zh-CN",
     lng: localStorage.getItem('i18nextLng') ? localStorage.getItem('i18nextLng') : 'zh-CN',
-    debug: true,
+    debug: false,
     resources: resources,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

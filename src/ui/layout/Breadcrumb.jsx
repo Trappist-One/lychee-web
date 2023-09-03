@@ -25,7 +25,7 @@ export default function Breadcrumb() {
     }
   };
   return (
-    <div className="mt-1 h-8 w-full px-2 py-1">
+    <div className="mt-1 h-8 w-full px-2 border-b-2">
       <div className=" flex text-xs gap-1">
         {Array.from(state.tabs).map((tab) => {
           return (

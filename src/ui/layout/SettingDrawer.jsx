@@ -82,7 +82,7 @@ const langData = [
   },
   {
       code: 'tw',
-      name: '中國台灣',
+      name: '繁體中文',
       i18n: 'zh-tw'
   },
 ]
