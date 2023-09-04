@@ -52,7 +52,6 @@ export default function Header() {
           <div>
             <div className="w-full h-full flex items-center justify-end gap-x-2">
               <IconButton
-                aria-label="delete"
                 size="small"
                 onClick={() => screenfull.toggle()}
               >     
@@ -60,22 +59,23 @@ export default function Header() {
               </IconButton>
 
               <IconButton
-                aria-label="delete"
                 size="small"
                 onClick={() => setOpenDrawer(true)}
               >
                 <Settings />
               </IconButton>
-              <label
+              <IconButton
+                aria-label="cursor-pointer"
+                size="small"
                 onClick={handleClick()}
-                className=" cursor-pointer"
-                aria-describedby={id}
               >
-                <Avatar
+               <Avatar
                   className=" border w-8 h-8"
                   src="https://api.dicebear.com/6.x/adventurer/svg?seed=Abby"
                 ></Avatar>
-              </label>
+                
+                </IconButton>
+      
 
               <Popper
                 id={id}
