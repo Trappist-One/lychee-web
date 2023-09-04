@@ -3,19 +3,21 @@ const menuDataList = [{
     "id": 1,
     "chridList": [
       {
-        "name": "测试标题",
+        "name": "测试标题1",
         "id":11,
         "title":true
       },
       {
-        "name": "测试菜单1",
+        "name": "TAB1",
         "id":111,
-        "title":false
+        "title":false,
+        "path": '/tab1'
       },
       {
-        "name": "测试菜单2",
+        "name": "TAB2",
         "id":112,
-        "title":false
+        "title":false,
+        "path": '/tab2'
       },
       {
         "name": "测试标题2",
@@ -23,14 +25,16 @@ const menuDataList = [{
         "title":true
       },
       {
-        "name": "测试菜单2",
+        "name": "TAB3",
         "id":121,
-        "title":false
+        "title":false,
+        "path": '/tab3'
       },
       {
         "name": "测试菜单2",
         "id":122,
-        "title":false
+        "title":false,
+        "path": '/404'
       }
     ]
   },

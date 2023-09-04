@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { menuDataList } from "./data";
 import { C } from "./Layout";
+import { useNavigate } from "react-router";
 
 export default function Silder() {
   const { state, dispatch} = useContext(C);
@@ -26,6 +27,7 @@ export default function Silder() {
 
 const MenuList = (prop) => {
   const { state, dispatch} = useContext(C);
+  const navigate = useNavigate();
 
   const clickSubMenu = (menuData) => {
     const exist = Array.from(prop.tabs).some((tab) => tab.id == menuData.id);
@@ -36,6 +38,7 @@ const MenuList = (prop) => {
       dispatch({type: 'setTabs', val: newTabs})
     }
     dispatch({type: 'setActiveMenuId', val:menuData.id})
+    navigate(menuData.path)
   };
 
   const dataList = prop.dataList;
