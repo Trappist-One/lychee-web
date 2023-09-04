@@ -4,7 +4,7 @@ import {
   Fade,
   IconButton,
 } from "@mui/material";
-import { Settings } from "@mui/icons-material";
+import { Fullscreen, Settings } from "@mui/icons-material";
 import { C } from "./Layout";
 import {
   TbLayoutSidebarLeftCollapse,
@@ -13,6 +13,7 @@ import {
 import { useContext, useState } from "react";
 import SettingDrawer from "./SettingDrawer";
 import UserProfileList from "../components/UserProfileList";
+import screenfull from 'screenfull'
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -50,6 +51,14 @@ export default function Header() {
           </div>
           <div>
             <div className="w-full h-full flex items-center justify-end gap-x-2">
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={() => screenfull.toggle()}
+              >     
+                <Fullscreen />
+              </IconButton>
+
               <IconButton
                 aria-label="delete"
                 size="small"
