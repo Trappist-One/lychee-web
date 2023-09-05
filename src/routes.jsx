@@ -3,14 +3,15 @@ import { createBrowserRouter } from "react-router-dom";
 import Tab1 from "./ui/pages/Tab1";
 import Tab2 from "./ui/pages/Tab2";
 import Tab3 from "./ui/pages/Tab3";
-import Error404 from "./ui/pages/errors/404";
+import P404 from "./ui/pages/errors/P404";
+import LoginPage from "./ui/pages/Login/Login";
 
 
 const routes = [
   {
     path: "/",
     element: <Layout />,
-    errorElement: <Error404/>,
+    errorElement: <P404/>,
     children: [
       {
         path: '/tab1',
@@ -26,6 +27,10 @@ const routes = [
       }
     ],
   },
+  {
+    path: '/login',
+    element: <LoginPage />
+  }
 ];
 
 const router = createBrowserRouter(routes);

@@ -20,7 +20,7 @@ export default function Layout() {
       <ConfigProvider>
         <div className="h-full flex flex-row">
           <Silder></Silder>
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full bg-ly-gray">
             <Header></Header>
             <Breadcrumb></Breadcrumb>
             <Content>

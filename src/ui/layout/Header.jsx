@@ -9,6 +9,8 @@ import { C } from "./Layout";
 import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarRightCollapse,
+  TbArrowsMinimize,
+  TbArrowsMaximize,
 } from "react-icons/tb";
 import { useContext, useState } from "react";
 import SettingDrawer from "./SettingDrawer";
@@ -18,6 +20,7 @@ import screenfull from 'screenfull'
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [full, setFull] = useState(false);
   const { state, dispatch } = useContext(C);
 
   const [placement, setPlacement] = useState();
@@ -38,7 +41,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="h-12 shadow-md-b w-full p-2 flex ">
+      <div className="h-12 shadow-md-b w-full p-2 flex bg-ly-color">
         <div className="w-full h-full flex justify-between items-center">
           <div>
             <IconButton aria-label="delete" size="small" onClick={expandFun}>
@@ -52,30 +55,32 @@ export default function Header() {
           <div>
             <div className="w-full h-full flex items-center justify-end gap-x-2">
               <IconButton
-                size="small"
-                onClick={() => screenfull.toggle()}
-              >     
-                <Fullscreen />
+                // size="small"
+                onClick={() => {
+                  screenfull.toggle()
+                  setFull(!full)
+                }}
+              >
+                {full ? <TbArrowsMinimize className="h-5 w-5"/> : <TbArrowsMaximize className="h-5 w-5"/>}
               </IconButton>
 
               <IconButton
-                size="small"
+                // size="small"
                 onClick={() => setOpenDrawer(true)}
               >
                 <Settings />
               </IconButton>
               <IconButton
-                aria-label="cursor-pointer"
                 size="small"
                 onClick={handleClick()}
               >
-               <Avatar
+                <Avatar
                   className=" border w-8 h-8"
                   src="https://api.dicebear.com/6.x/adventurer/svg?seed=Abby"
                 ></Avatar>
-                
-                </IconButton>
-      
+
+              </IconButton>
+
 
               <Popper
                 id={id}
