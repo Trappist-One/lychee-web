@@ -15,7 +15,7 @@ export default function Silder() {
           src="../src/assets/icons/logo.svg"
         ></img>
       </div>
-      <div className=" w-4/5 h-[2px] bg-ly-bg-primary mx-auto"></div>
+      <div className=" w-4/5 h-[2px] bg-ly-primary mx-auto"></div>
       <MenuList
         dataList={menuDataList}
         showSub={state.expand}
