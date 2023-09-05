@@ -3,6 +3,7 @@ import {
   Popper,
   Fade,
   IconButton,
+  Popover,
 } from "@mui/material";
 import { Fullscreen, Settings } from "@mui/icons-material";
 import { C } from "./Layout";
@@ -17,14 +18,16 @@ import screenfull from 'screenfull'
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
   const { state, dispatch } = useContext(C);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const [placement, setPlacement] = useState();
-  const handleClick = (newPlacement) => (event) => {
+  const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
-    setOpen((prev) => placement !== newPlacement || !prev);
-    setPlacement(newPlacement);
+    setOpen(true)
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const expandFun = () => {
@@ -54,7 +57,7 @@ export default function Header() {
               <IconButton
                 size="small"
                 onClick={() => screenfull.toggle()}
-              >     
+              >
                 <Fullscreen />
               </IconButton>
 
@@ -67,31 +70,30 @@ export default function Header() {
               <IconButton
                 aria-label="cursor-pointer"
                 size="small"
-                onClick={handleClick()}
+                onClick={handleOpen}
               >
-               <Avatar
+                <Avatar
                   className=" border w-8 h-8"
                   src="https://api.dicebear.com/6.x/adventurer/svg?seed=Abby"
                 ></Avatar>
-                
-                </IconButton>
-      
+              </IconButton>
 
-              <Popper
+              <Popover
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                placement="bottom"
-                transition
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
               >
-                {({ TransitionProps }) => (
-                  <Fade {...TransitionProps}>
-                    <div>
-                      <UserProfileList></UserProfileList>
-                    </div>
-                  </Fade>
-                )}
-              </Popper>
+                <UserProfileList></UserProfileList>
+              </Popover>
 
               <SettingDrawer
                 open={openDrawer}
