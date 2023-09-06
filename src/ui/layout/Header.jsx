@@ -27,7 +27,7 @@ export default function Header() {
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setOpen(false)
   };
 
   const expandFun = () => {
@@ -35,9 +35,7 @@ export default function Header() {
   };
 
   const [openDrawer, setOpenDrawer] = useState(false);
-
-  const canBeOpen = open && Boolean(anchorEl);
-  const id = canBeOpen ? "transition-popper" : undefined;
+  const id =  "userSettingList-popover";
 
   return (
     <>

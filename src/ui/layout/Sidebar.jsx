@@ -77,7 +77,7 @@ const MenuList = (prop) => {
           {subMenuDataList.map((menuData) => {
             if (menuData.title == true) {
               return (
-                <li key={menuData.id} className="px-4 pt-4 text-ly-bg-accent">
+                <li key={menuData.id} className="px-4 pt-4 text-ly-accent">
                   {menuData.name}
                 </li>
               );
