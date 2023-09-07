@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import Logo from "../../components/Logo";
-import { Button, TextField } from "@mui/material";
+import { Button, Input, TextField } from "@mui/material";
 
 export default function Login() {
   const { t } = useTranslation();
   return (
-    <div className="flex h-full w-full bg-white">
+    <div className="flex h-full w-full">
       <div className="flex h-full w-full flex-col px-10 pt-10 pb-2 bg-[url('assets/icons/login_undraw.svg')] bg-no-repeat background-blur-md">
         <div className="">
           <div>
@@ -24,22 +24,25 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <div className="h-full w-[600px] bg-red-300 px-5 flex items-center">
+      <div className="h-full w-[600px] bg-red-300 px-5 flex items-center rounded-3xl">
         <div className="w-full h-[500px]">
           <div className=" grid grid-cols-1 gap-8">
             <div className=" text-center text-white">
-               LYCHEE MANAGE SYSTEM
+              { t('荔枝后台管理系统')}
             </div>
-            <TextField id="outlined-basic" label="username" />
+            <TextField id="outlined-basic" 
+            label={t("用户名")} />
             <TextField
               id="outlined-password-input"
-              label="password"
+              label={t("密码")}
               type="password"
               autoComplete="current-password"
             />
-            <div className="flex  flex-row-reverse">
-            <Button variant="contained">Login</Button>
+            <div className="flex justify-between">
+                <div className="h-10 w-[200px] bg-slate-300"></div>
+                <TextField variant="standard" className="h-10 w-20"></TextField>
             </div>
+            <Button variant="contained" fullWidth size="large">{t('登录')}</Button>
           </div>
         </div>
       </div>
