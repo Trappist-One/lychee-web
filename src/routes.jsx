@@ -4,6 +4,7 @@ import Tab1 from "./ui/pages/Tab1";
 import Tab2 from "./ui/pages/Tab2";
 import Tab3 from "./ui/pages/Tab3";
 import Error404 from "./ui/pages/errors/404";
+import Login from "./ui/pages/login/Login";
 
 
 const routes = [
@@ -26,6 +27,10 @@ const routes = [
       }
     ],
   },
+  {
+    path: "/login",
+    element: <Login />,
+  }
 ];
 
 const router = createBrowserRouter(routes);
