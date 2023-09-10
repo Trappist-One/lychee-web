@@ -1,9 +1,15 @@
 import { useTranslation } from "react-i18next";
 import Logo from "../../components/Logo";
 import { Button, Input, TextField } from "@mui/material";
+import { useNavigate } from "react-router";
 
 export default function Login() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const loginFun = () => {
+    navigate('/index')
+    console.log(111);
+  }
   return (
     <div className="flex h-full w-full">
       <div className="flex h-full w-full flex-col px-10 pt-10 pb-2 bg-[url('assets/icons/login_undraw.svg')] bg-no-repeat background-blur-md">
@@ -42,7 +48,7 @@ export default function Login() {
                 <div className="h-10 w-[200px] bg-slate-300"></div>
                 <TextField variant="standard" className="h-10 w-20"></TextField>
             </div>
-            <Button variant="contained" fullWidth size="large">{t('登录')}</Button>
+            <Button variant="contained" fullWidth size="large" onClick={() => loginFun()}>{t('登录')}</Button>
           </div>
         </div>
       </div>

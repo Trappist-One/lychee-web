@@ -10,26 +10,26 @@ import Login from "./ui/pages/login/Login";
 const routes = [
   {
     path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/index",
     element: <Layout />,
     errorElement: <Error404/>,
     children: [
       {
-        path: '/tab1',
+        path: 'tab1',
         element: <Tab1></Tab1>
       },
       {
-        path: '/tab2',
+        path: 'tab2',
         element: <Tab2></Tab2>
       },
       {
-        path: '/tab3',
+        path: 'tab3',
         element: <Tab3></Tab3>
       }
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
   }
 ];
 
