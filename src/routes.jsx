@@ -19,15 +19,15 @@ const routes = [
     children: [
       {
         path: 'tab1',
-        element: <Tab1></Tab1>
+        element: <Tab1/>
       },
       {
         path: 'tab2',
-        element: <Tab2></Tab2>
+        element: <Tab2/>
       },
       {
         path: 'tab3',
-        element: <Tab3></Tab3>
+        element: <Tab3/>
       }
     ],
   }

@@ -1,15 +1,32 @@
 import { useTranslation } from "react-i18next";
 import Logo from "../../components/Logo";
-import { Button, Input, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router";
+import { getCodeImg } from "@/api/login";
+import { useEffect } from "react";
+console.log('  import.meta.env: ', import.meta.env);
+
+
 
 export default function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const loginFun = () => {
     navigate('/index')
-    console.log(111);
   }
+
+  let uuid;
+  let codeUrl;
+
+  useEffect(() => {
+    getCodeImg().then((res) => {
+        this.codeUrl = 'data:image/gif;base64,' + res.img;
+        this.uuid = res.uuid;
+      });
+  })
+
+  console.log(uuid);
+
   return (
     <div className="flex h-full w-full">
       <div className="flex h-full w-full flex-col px-10 pt-10 pb-2 bg-[url('assets/icons/login_undraw.svg')] bg-no-repeat background-blur-md">

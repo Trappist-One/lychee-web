@@ -1,4 +1,5 @@
-import {decrypt, encrypt} from "@/utils/jsencrypt";
+import { encrypt,decrypt } from "./ jsencrypt"
+
 
 const AccessTokenKey = 'ACCESS_TOKEN'
 const RefreshTokenKey = 'REFRESH_TOKEN'

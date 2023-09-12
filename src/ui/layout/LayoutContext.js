@@ -36,7 +36,8 @@ const State = {
     {
       name: "首页",
       path: "/",
-      id: 0,
+      id: 999,
+      parentId: 0
     },
   ],
   theme: localStorage.getItem("theme"),

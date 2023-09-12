@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   getAccessToken,
   getRefreshToken,
-  refreshToken,
   setToken,
 } from "../../utils/auth";
 
@@ -25,7 +24,7 @@ export let isRelogin = { show: false };
 // 创建axios实例
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
-  baseURL: import.meta.env.VITE_APP_BASE_URL + "/admin-api/", // 此处的 /admin-api/ 地址，原因是后端的基础路径为 /admin-api/
+  baseURL: import.meta.env.VITE_APP_BASE_URL, // 此处的 /admin-api/ 地址，原因是后端的基础路径为 /admin-api/
   // 超时
   timeout: 30000,
   // 禁用 Cookie 等信息
@@ -133,3 +132,5 @@ export function getBaseHeader() {
 function handleAuthorized() {
   return Promise.reject("无效的会话，或者会话已过期，请重新登录。");
 }
+
+export default service;
