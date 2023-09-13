@@ -4,9 +4,6 @@ import { Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router";
 import { getCodeImg } from "@/api/login";
 import { useEffect } from "react";
-console.log('  import.meta.env: ', import.meta.env);
-
-
 
 export default function Login() {
   const { t } = useTranslation();
@@ -20,12 +17,9 @@ export default function Login() {
 
   useEffect(() => {
     getCodeImg().then((res) => {
-        this.codeUrl = 'data:image/gif;base64,' + res.img;
-        this.uuid = res.uuid;
+        console.log(res);
       });
   })
-
-  console.log(uuid);
 
   return (
     <div className="flex h-full w-full">

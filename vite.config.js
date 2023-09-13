@@ -16,7 +16,7 @@ export default defineConfig(({ command, mode }) => {
       // 是否开启 https
       https: false,
       // 端口号
-      port: 80,
+      port: env.VITE_PORT,
       host: "0.0.0.0",
     },
     resolve: {
