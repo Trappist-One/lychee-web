@@ -3,7 +3,8 @@ import Logo from "../../components/Logo";
 import { Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router";
 import { getCodeImg } from "@/api/login";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Image } from "@mui/icons-material";
 
 export default function Login() {
   const { t } = useTranslation();
@@ -12,14 +13,20 @@ export default function Login() {
     navigate('/index')
   }
 
-  let uuid;
-  let codeUrl;
+  const [captchaCode, setCaptchaCode] = useState('')
+  const [refreshImgCode, setRefreshImgCode] = useState(false)
+
+
+  const getCaptchaCode = async () => {
+    await getCodeImg().then((res) => {
+      setCaptchaCode('data:image/gif;base64,' + res.img)
+    });
+  }
 
   useEffect(() => {
-    getCodeImg().then((res) => {
-        console.log(res);
-      });
-  })
+    getCaptchaCode();
+  }, [refreshImgCode]);
+
 
   return (
     <div className="flex h-full w-full">
@@ -45,10 +52,10 @@ export default function Login() {
         <div className="w-full h-[500px]">
           <div className=" grid grid-cols-1 gap-8">
             <div className=" text-center text-white">
-              { t('荔枝后台管理系统')}
+              {t('荔枝后台管理系统')}
             </div>
-            <TextField id="outlined-basic" 
-            label={t("用户名")} />
+            <TextField id="outlined-basic"
+              label={t("用户名")} />
             <TextField
               id="outlined-password-input"
               label={t("密码")}
@@ -56,8 +63,10 @@ export default function Login() {
               autoComplete="current-password"
             />
             <div className="flex justify-between">
-                <div className="h-10 w-[200px] bg-slate-300"></div>
-                <TextField variant="standard" className="h-10 w-20"></TextField>
+              <div className="h-10 w-[200px] bg-slate-300" onClick={() => setRefreshImgCode(!refreshImgCode)}>
+                <img src= {captchaCode}></img>
+              </div>
+              <TextField variant="standard" className="h-10 w-20"></TextField>
             </div>
             <Button variant="contained" fullWidth size="large" onClick={() => loginFun()}>{t('登录')}</Button>
           </div>
