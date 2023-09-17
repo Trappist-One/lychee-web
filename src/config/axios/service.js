@@ -4,6 +4,10 @@ import {
 } from "../../utils/auth";
 
 import errorCode from '@/utils/errorCode'
+import SnackbarUtils from "../snackbar/SnackbarUtils";
+
+
+
 
 
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
@@ -57,6 +61,8 @@ service.interceptors.request.use(config => {
 
 // 响应拦截器
 service.interceptors.response.use(res => {
+
+
   // 未设置状态码则默认成功状态
   const code = res.data.code || res.data.status || 200
   // 获取错误信息
@@ -97,6 +103,7 @@ service.interceptors.response.use(res => {
 error => {
   // console.log('err', error)
   let { message } = error
+  SnackbarUtils.success(message)
   if (message === 'Network Error') {
     message = '后端接口连接异常'
   } else if (message.includes('timeout')) {
@@ -110,7 +117,6 @@ error => {
   //   type: 'error',
   //   duration: 5 * 1000
   // })
-  console.log(error);
   return Promise.reject(error)
 }
 )

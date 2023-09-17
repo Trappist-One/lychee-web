@@ -2,14 +2,13 @@ import Header from "./Header";
 import Silder from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer } from "react";
 
 import { LayoutContext, State } from "./LayoutContext";
 
 const C = createContext({});
 
 export default function Layout() {
-
   return (
     <>
       <ConfigProvider>
@@ -18,8 +17,7 @@ export default function Layout() {
           <div className="flex flex-col w-full">
             <Header></Header>
             <Breadcrumb></Breadcrumb>
-            <Content>
-            </Content>
+            <Content></Content>
           </div>
         </div>
       </ConfigProvider>

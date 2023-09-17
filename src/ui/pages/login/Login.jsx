@@ -4,7 +4,6 @@ import { Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router";
 import { getCodeImg } from "@/api/login";
 import { useEffect, useState } from "react";
-import { Image } from "@mui/icons-material";
 
 export default function Login() {
   const { t } = useTranslation();
