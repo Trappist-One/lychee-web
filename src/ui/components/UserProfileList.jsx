@@ -1,4 +1,4 @@
-import { Drafts, SettingsAccessibility } from "@mui/icons-material";
+import {SettingsAccessibility } from "@mui/icons-material";
 import {
   Box,
   Divider,

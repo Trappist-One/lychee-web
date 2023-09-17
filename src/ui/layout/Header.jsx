@@ -1,7 +1,5 @@
 import {
   Avatar,
-  Popper,
-  Fade,
   IconButton,
   Popover,
 } from "@mui/material";

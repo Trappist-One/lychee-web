@@ -1,8 +1,7 @@
 import { SnackbarUtilsConfigurator } from "@/config/snackbar/SnackbarUtils";
 import { SnackbarProvider } from "notistack";
 import Grow from "@/config/snackbar/Grow";
-import { Cancel } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Error } from "@mui/icons-material";
 
 export default function LySnackbarProvider({ children }) {
   const anchorOrigin = {
@@ -18,10 +17,9 @@ export default function LySnackbarProvider({ children }) {
         anchorOrigin={anchorOrigin}
         autoHideDuration={3000}
         TransitionComponent={Grow}
-        // hideIconVariant={true}
         iconVariant={
           {
-            // error: <Error className=" mr-2"></Error>,
+            error: <Error className=" h-5 w-5 mr-2" ></Error>,
             // warn: <Warning className=" mr-2"></Warning>,
             // info: <Info className=" mr-2"></Info>,
             // success: <OneK className=" mr-2"></OneK>,

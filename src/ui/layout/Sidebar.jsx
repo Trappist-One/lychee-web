@@ -2,8 +2,6 @@ import { useContext, useState } from "react";
 import { menuDataList } from "./data";
 import { C } from "./Layout";
 import { useNavigate } from "react-router";
-import { getCodeImg } from "@/api/login";
-
 
 export default function Silder() {
   const { state, dispatch} = useContext(C);
@@ -28,14 +26,6 @@ export default function Silder() {
 }
 
 const MenuList = (prop) => {
-  const [captchaCode, setCaptchaCode] = useState(false)
-
-
-  const getCaptchaCode = async () => {
-    await getCodeImg().then((res) => {
-      setCaptchaCode('data:image/gif;base64,' + res.img)
-    });
-  }
   const { state, dispatch} = useContext(C);
   const navigate = useNavigate();
 
@@ -48,8 +38,7 @@ const MenuList = (prop) => {
       dispatch({type: 'setTabs', val: newTabs})
     }
     dispatch({type: 'setActiveMenuId', val:menuData.id})
-    // navigate(menuData.path)
-    getCaptchaCode()
+    navigate(menuData.path)
   };
 
   const dataList = prop.dataList;
