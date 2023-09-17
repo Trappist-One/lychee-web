@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Logo from "../../components/Logo";
+import Logo from "@/ui/components/Logo";
 import {
   Button,
   FormControl,
@@ -14,7 +14,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/api/login";
-import { setTenantId as setLocalTenantId, getTenantId } from "@/utils/auth";
+import { setTenantId as setLocalTenantId, getTenantId, setToken } from "@/utils/auth";
 
 export default function Login() {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ export default function Login() {
   const loginSubmit = (formData) => {
     login(formData.userName, formData.password)
       .then((res) => {
-        console.log(res);
+        setToken(res.data)
         navigate("/index");
       })
       .catch((error) => {
