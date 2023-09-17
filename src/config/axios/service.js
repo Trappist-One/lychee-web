@@ -1,10 +1,12 @@
 import axios from "axios";
 import { getAccessToken, getTenantId } from "@/utils/auth";
-import {getPath, getTenantEnable} from "@/utils/lychee";
-
+import { getPath, getTenantEnable } from "@/utils/lychee";
 
 import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
+import i18next from "i18next";
+
+const t = i18next.t;
 
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
 // 是否显示重新登录
@@ -28,13 +30,13 @@ service.interceptors.request.use(
     if (getAccessToken() && !isToken) {
       config.headers["Authorization"] = "Bearer " + getAccessToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
     }
-      // 设置租户
-  if (getTenantEnable()) {
-    const tenantId = getTenantId();
-    if (tenantId) {
-      config.headers['tenant-id'] = tenantId;
+    // 设置租户
+    if (getTenantEnable()) {
+      const tenantId = getTenantId();
+      if (tenantId) {
+        config.headers["tenant-id"] = tenantId;
+      }
     }
-  }
     // get请求映射params参数
     if (config.method === "get" && config.params) {
       let url = config.url + "?";
@@ -76,13 +78,15 @@ service.interceptors.response.use(
       res.data.msg ||
       res.data.message ||
       errorCode["default"];
+
     if (code === 401) {
-      SnackbarUtils.error(msg);
+      SnackbarUtils.error(t(msg));
+      return Promise.reject(new Error(msg));
     } else if (code === 500) {
-      SnackbarUtils.error(msg);
+      SnackbarUtils.error(t(msg));
       return Promise.reject(new Error(msg));
     } else if (code !== 200) {
-      SnackbarUtils.error(msg);
+      SnackbarUtils.error(t(msg));
       return Promise.reject(new Error(msg));
     } else {
       return res.data;
@@ -99,8 +103,8 @@ service.interceptors.response.use(
       // message = "系统接口" + message.substr(message.length - 3) + "异常";
       message = "服务器异常，获取数据失败";
     }
-    SnackbarUtils.error(message);
-    return Promise.reject(error);
+    SnackbarUtils.error(t(message));
+    return Promise.reject(new Error(message));
   }
 );
 
