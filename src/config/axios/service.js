@@ -1,16 +1,24 @@
 import axios from "axios";
-import { getAccessToken, getTenantId } from "@/utils/auth";
+import { getAccessToken, getTenantId, getRefreshToken, setToken } from "@/utils/auth";
 import { getPath, getTenantEnable } from "@/utils/lychee";
+import {refreshToken} from "@/api/login";
+
 
 import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
 import i18next from "i18next";
+import ReLoginDialog from "@/ui/components/ReLoginDialog";
+
 
 const t = i18next.t;
 
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
 // 是否显示重新登录
 export let isRelogin = { show: false };
+// 请求队列
+let requestList = []
+// 是否正在刷新中
+let isRefreshToken = false
 
 // 创建axios实例
 const service = axios.create({
@@ -69,7 +77,7 @@ service.interceptors.request.use(
 
 // 响应拦截器
 service.interceptors.response.use(
-  (res) => {
+  async (res) => {
     // 未设置状态码则默认成功状态
     const code = res.data.code || res.data.status || 200;
     // 获取错误信息
@@ -80,8 +88,38 @@ service.interceptors.response.use(
       errorCode["default"];
 
     if (code === 401) {
-      SnackbarUtils.error(t(msg));
-      return Promise.reject(new Error(msg));
+       // 如果未认证，并且未进行刷新令牌，说明可能是访问令牌过期了
+    if (!isRefreshToken) {
+      isRefreshToken = true;
+      // 1. 如果获取不到刷新令牌，则只能执行登出操作
+      if (!getRefreshToken()) {
+        return handleAuthorized();
+      }
+      // 2. 进行刷新访问令牌
+      try {
+        const refreshTokenRes = await refreshToken()
+        // 2.1 刷新成功，则回放队列的请求 + 当前请求
+        setToken(refreshTokenRes.data)
+        requestList.forEach(cb => cb())
+        return service(res.config)
+      } catch (e) {// 为什么需要 catch 异常呢？刷新失败时，请求因为 Promise.reject 触发异常。
+        // 2.2 刷新失败，只回放队列的请求
+        requestList.forEach(cb => cb())
+        // 提示是否要登出。即不回放当前请求！不然会形成递归
+        return handleAuthorized();
+      } finally {
+        requestList = []
+        isRefreshToken = false
+      }
+    } else {
+      // 添加到队列，等待刷新获取到新的令牌
+      return new Promise(resolve => {
+        requestList.push(() => {
+          res.config.headers['Authorization'] = 'Bearer ' + getAccessToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+          resolve(service(res.config))
+        })
+      })
+    }
     } else if (code === 500) {
       SnackbarUtils.error(t(msg));
       return Promise.reject(new Error(msg));
@@ -107,5 +145,27 @@ service.interceptors.response.use(
     return Promise.reject(new Error(message));
   }
 );
+
+function handleAuthorized() {
+  if (!isRelogin.show) {
+    isRelogin.show = true;
+    ReLoginDialog
+    MessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', {
+        confirmButtonText: '重新登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }
+    ).then(() => {
+      isRelogin.show = false;
+      store.dispatch('LogOut').then(() => {
+        location.href = getPath('/index');
+      })
+    }).catch(() => {
+      isRelogin.show = false;
+    });
+  }
+  return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
+}
+
 
 export default service;

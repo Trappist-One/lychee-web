@@ -2,6 +2,7 @@ import { RouterProvider } from "react-router-dom";
 import { useEffect } from "react";
 import router from "./routes";
 import LySnackbarProvider from "./ui/components/LySnackbarProvider";
+import ReLoginDialog from "./ui/components/ReLoginDialog";
 
 function App() {
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee">
       <LySnackbarProvider>
+        <ReLoginDialog/>
         <RouterProvider router={router}></RouterProvider>
       </LySnackbarProvider>
     </div>

@@ -22,7 +22,7 @@ export default function Login() {
   const loginSubmit = (formData) => {
     login(formData.userName, formData.password)
       .then((res) => {
-        setToken(res.data)
+        // setToken(res.data)
         navigate("/index");
       })
       .catch((error) => {
