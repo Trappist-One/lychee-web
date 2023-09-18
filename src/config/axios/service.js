@@ -7,7 +7,10 @@ import {refreshToken} from "@/api/login";
 import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
 import i18next from "i18next";
-import ReLoginDialog from "@/ui/components/ReLoginDialog";
+import ConfirmDialogUtils from "@/config/confirmDialog/ConfirmDialogUtils";
+import { useNavigate } from "react-router";
+
+
 
 
 const t = i18next.t;
@@ -124,7 +127,8 @@ service.interceptors.response.use(
       SnackbarUtils.error(t(msg));
       return Promise.reject(new Error(msg));
     } else if (code !== 200) {
-      SnackbarUtils.error(t(msg));
+      // SnackbarUtils.error(t(msg));
+      ConfirmDialogUtils.confirm('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{useNavigate("/index")})
       return Promise.reject(new Error(msg));
     } else {
       return res.data;
@@ -149,20 +153,20 @@ service.interceptors.response.use(
 function handleAuthorized() {
   if (!isRelogin.show) {
     isRelogin.show = true;
-    ReLoginDialog
-    MessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', {
-        confirmButtonText: '重新登录',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }
-    ).then(() => {
-      isRelogin.show = false;
-      store.dispatch('LogOut').then(() => {
-        location.href = getPath('/index');
-      })
-    }).catch(() => {
-      isRelogin.show = false;
-    });
+    
+    // MessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', {
+    //     confirmButtonText: '重新登录',
+    //     cancelButtonText: '取消',
+    //     type: 'warning'
+    //   }
+    // ).then(() => {
+    //   isRelogin.show = false;
+    //   store.dispatch('LogOut').then(() => {
+    //     location.href = getPath('/index');
+    //   })
+    // }).catch(() => {
+    //   isRelogin.show = false;
+    // });
   }
   return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
 }
