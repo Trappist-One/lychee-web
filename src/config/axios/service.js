@@ -7,8 +7,8 @@ import {refreshToken} from "@/api/login";
 import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
 import i18next from "i18next";
-import ConfirmDialogUtils from "@/config/confirmDialog/ConfirmDialogUtils";
 import { useNavigate } from "react-router";
+import { confirmDialog } from "@/ui/components/LyConfirmDialog";
 
 
 
@@ -128,7 +128,7 @@ service.interceptors.response.use(
       return Promise.reject(new Error(msg));
     } else if (code !== 200) {
       // SnackbarUtils.error(t(msg));
-      ConfirmDialogUtils.confirm('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{useNavigate("/index")})
+      confirmDialog.open('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{useNavigate("/login")})
       return Promise.reject(new Error(msg));
     } else {
       return res.data;

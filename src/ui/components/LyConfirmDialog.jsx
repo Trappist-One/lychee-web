@@ -1,65 +1,70 @@
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { useTranslation } from 'react-i18next';
-import { forwardRef, useState } from 'react';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useTranslation } from "react-i18next";
+import { createContext, useState } from "react";
 
+const ConfirmDialogContext = createContext();
 
-const LyConfirmDialog = forwardRef((prop, ref) => {
+export default function LyConfirmDialog() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [onConfirm, setOnConfirm] = useState(() => {});
 
-  const handleClose = () => {
+  const openDialog = (title, content, onConfirm) => {
+    setTitle(title);
+    setContent(content);
+    setOnConfirm(() => onConfirm);
+    setOpen(true);
+  };
+
+  const closeDialog = () => {
     setOpen(false);
+    setTitle("");
+    setContent("");
+    setOnConfirm(() => {});
   };
 
-  let callback = () => {
-    console.log(777777777777);
+  const handleConfirm = () => {
+    onConfirm();
+    closeDialog();
   };
-  
-  const handleOk = () => {
-    callback();
-    setOpen(false)
-  }
-
-  if (ref) {
-    ref.current = {
-      setOpen,
-      setTitle,
-      setContent,
-      callback
-    }
-  }
 
   return (
-    <div>
+    <ConfirmDialogContext.Provider value={{ openDialog }}>
       <Dialog
         open={open}
         aria-labelledby="ly-confirm-dialog-title"
         aria-describedby="ly-confirm-dialog-description"
       >
-        <DialogTitle id="ly-confirm-dialog-title">
-          {title}
-        </DialogTitle>
+        <DialogTitle id="ly-confirm-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="ly-confirm-dialog-description">
             {content}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>{t('取消')}</Button>
-          <Button onClick={handleOk} autoFocus>{t('确认')}</Button>
+          <Button onClick={closeDialog}>{t("取消")}</Button>
+          <Button onClick={handleConfirm} autoFocus>
+            {t("确认")}
+          </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </ConfirmDialogContext.Provider>
   );
-});
+}
 
-LyConfirmDialog.displayName = 'LyConfirmDialog'
+// 创建全局确认对话框单例对象
+export const confirmDialog = {
+  open: null,
+};
 
-export default LyConfirmDialog;
+// 注册全局确认对话框实例
+export const registerConfirmDialogInstance = (instance) => {
+  confirmDialog.open = instance.openDialog;
+};
