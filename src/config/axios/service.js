@@ -2,16 +2,10 @@ import axios from "axios";
 import { getAccessToken, getTenantId, getRefreshToken, setToken } from "@/utils/auth";
 import { getPath, getTenantEnable } from "@/utils/lychee";
 import {refreshToken} from "@/api/login";
-
-
 import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
 import i18next from "i18next";
-import { useNavigate } from "react-router";
 import { confirmDialog } from "@/ui/components/LyConfirmDialog";
-
-
-
 
 const t = i18next.t;
 
@@ -128,7 +122,7 @@ service.interceptors.response.use(
       return Promise.reject(new Error(msg));
     } else if (code !== 200) {
       // SnackbarUtils.error(t(msg));
-      confirmDialog.open('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{useNavigate("/login")})
+      confirmDialog.open('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{window.location.href="/index"})
       return Promise.reject(new Error(msg));
     } else {
       return res.data;

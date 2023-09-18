@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useTranslation } from "react-i18next";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 
 const ConfirmDialogContext = createContext();
 
@@ -34,6 +34,20 @@ export default function LyConfirmDialog() {
     onConfirm();
     closeDialog();
   };
+
+  const confirmDialogInstanceRef = useRef();
+
+  // 在组件挂载时注册全局确认对话框实例
+  useEffect(() => {
+    confirmDialogInstanceRef.current = {
+      openDialog: (title, content, onConfirm) => {
+        console.log(onConfirm);
+        openDialog(title, content, onConfirm)
+      },
+    };
+
+    registerConfirmDialogInstance(confirmDialogInstanceRef.current);
+  }, []);
 
   return (
     <ConfirmDialogContext.Provider value={{ openDialog }}>
@@ -65,6 +79,6 @@ export const confirmDialog = {
 };
 
 // 注册全局确认对话框实例
-export const registerConfirmDialogInstance = (instance) => {
+const registerConfirmDialogInstance = (instance) => {
   confirmDialog.open = instance.openDialog;
 };
