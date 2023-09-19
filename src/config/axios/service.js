@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getAccessToken, getTenantId, getRefreshToken, setToken } from "@/utils/auth";
-import { getPath, getTenantEnable } from "@/utils/lychee";
+import { getTenantEnable } from "@/utils/lychee";
 import {refreshToken} from "@/api/login";
 import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
@@ -134,7 +134,6 @@ service.interceptors.response.use(
   },
   (error) => {
     NProgress.done();
-    // console.log('err', error)
     let { message } = error;
     if (message === "Network Error") {
       message = "后端接口连接异常";

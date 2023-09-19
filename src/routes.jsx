@@ -1,10 +1,14 @@
-import Layout from "@/ui/layout/Layout";
 import { createBrowserRouter } from "react-router-dom";
-import Tab1 from "./ui/pages/Tab1";
-import Tab2 from "./ui/pages/Tab2";
-import Tab3 from "./ui/pages/Tab3";
-import Error404 from "./ui/pages/errors/404";
-import Login from "./ui/pages/login/Login";
+// import Login from "./ui/pages/login/Login";
+import { lazy } from "react";
+
+const Login = lazy(() => import("./ui/pages/login/Login"))
+
+const Layout = lazy(() => import("@/ui/layout/Layout"));
+const Tab1 = lazy(() => import("./ui/pages/Tab1"));
+const Tab2 = lazy(() => import("./ui/pages/Tab2"));
+const Tab3 = lazy(() => import("./ui/pages/Tab3"));
+const NoFound = lazy(() => import("./ui/pages/errors/NoFound"));
 
 
 const routes = [
@@ -13,9 +17,13 @@ const routes = [
     element: <Login />,
   },
   {
+    path: "*",
+    element: <NoFound />,
+  },
+  {
     path: "/index",
     element: <Layout />,
-    errorElement: <Error404/>,
+    errorElement: <NoFound/>,
     children: [
       {
         path: 'tab1',

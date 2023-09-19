@@ -13,7 +13,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/api/login";
-import { setTenantId as setLocalTenantId, getTenantId } from "@/utils/auth";
+import { setTenantId as setLocalTenantId, getTenantId, setToken } from "@/utils/auth";
 import { LoadingButton } from "@mui/lab";
 
 export default function Login() {
@@ -25,9 +25,10 @@ export default function Login() {
       .then((res) => {
         // setToken(res.data)
         navigate("/index");
-        console.log(res);
+        setToken(res.data)
       })
       .catch((error) => {
+        // https://juejin.cn/post/7277395904217907200?from=search-suggest
         console.log(error);
       }).finally(() => {
         setLoading(false)

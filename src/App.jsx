@@ -1,9 +1,10 @@
 import { RouterProvider } from "react-router-dom";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import router from "./routes";
 import LySnackbarProvider from "@/ui/components/LySnackbarProvider";
 import LyConfirmDialog from "@/ui/components/LyConfirmDialog";
 import NProgress from "nprogress";
+import Loading from "./ui/components/loading/index";
 NProgress.configure({ showSpinner: false});
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
     <div className="overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee">
       <LySnackbarProvider>
         <LyConfirmDialog/>
+        <Suspense fallback={<Loading />}></Suspense>
           <RouterProvider router={router}></RouterProvider>
       </LySnackbarProvider>
     </div>
