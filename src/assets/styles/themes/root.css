@@ -30,3 +30,7 @@ body {
     background-color: var(--ly-color);
     color: var(--ly-text);
 }
+
+#nprogress .bar {
+    background: var(--ly-secondary) !important;
+}

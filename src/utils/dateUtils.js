@@ -73,3 +73,7 @@ export function convertDate(date) {
   }
   return date;
 }
+
+export function sleep(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}

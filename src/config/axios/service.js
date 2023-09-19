@@ -6,6 +6,9 @@ import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
 import i18next from "i18next";
 import { confirmDialog } from "@/ui/components/LyConfirmDialog";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import { sleep } from "@/utils/dateUtils";
 
 const t = i18next.t;
 
@@ -30,6 +33,7 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
   (config) => {
+    NProgress.start();
     // 是否需要设置 token
     const isToken = (config.headers || {}).isToken === false;
     if (getAccessToken() && !isToken) {
@@ -67,7 +71,6 @@ service.interceptors.request.use(
     return config;
   },
   (error) => {
-    // console.log(error)
     Promise.reject(error);
   }
 );
@@ -75,6 +78,8 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   async (res) => {
+    NProgress.done();
+    sleep(2000)
     // 未设置状态码则默认成功状态
     const code = res.data.code || res.data.status || 200;
     // 获取错误信息
@@ -121,14 +126,14 @@ service.interceptors.response.use(
       SnackbarUtils.error(t(msg));
       return Promise.reject(new Error(msg));
     } else if (code !== 200) {
-      // SnackbarUtils.error(t(msg));
-      confirmDialog.open('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{window.location.href="/index"})
+      SnackbarUtils.error(t(msg));
       return Promise.reject(new Error(msg));
     } else {
       return res.data;
     }
   },
   (error) => {
+    NProgress.done();
     // console.log('err', error)
     let { message } = error;
     if (message === "Network Error") {
@@ -147,20 +152,7 @@ service.interceptors.response.use(
 function handleAuthorized() {
   if (!isRelogin.show) {
     isRelogin.show = true;
-    
-    // MessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', {
-    //     confirmButtonText: '重新登录',
-    //     cancelButtonText: '取消',
-    //     type: 'warning'
-    //   }
-    // ).then(() => {
-    //   isRelogin.show = false;
-    //   store.dispatch('LogOut').then(() => {
-    //     location.href = getPath('/index');
-    //   })
-    // }).catch(() => {
-    //   isRelogin.show = false;
-    // });
+    confirmDialog.open('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{window.location.href="/index"})
   }
   return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
 }

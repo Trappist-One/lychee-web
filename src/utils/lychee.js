@@ -3,7 +3,7 @@
  * Copyright (c) 2019 ruoyi
  */
 
-const baseURL = import.meta.env.VITE_APP_BASE_URL
+// const baseURL = import.meta.env.VITE_APP_BASE_URL
 
 // 日期格式化
 export function parseTime(time, pattern) {
@@ -104,7 +104,7 @@ export function addBeginAndEndTime(params, dateRange, propName) {
 export function sprintf(str) {
   const args = arguments
   let flag = true
-  const i = 1
+  let i = 1
   str = str.replace(/%s/g, function () {
     const arg = args[i++]
     if (typeof arg === 'undefined') {
@@ -177,47 +177,47 @@ export function getNowDateTime(timeStr) {
  * 获得租户功能是否开启
  */
 export function getTenantEnable() {
-  // console.log("enable: " + import.meta.env.VUE_APP_TENANT_ENABLE)
-  if (import.meta.env.VUE_APP_TENANT_ENABLE === "true") {
+  // console.log("enable: " + import.meta.env.VITE_APP_TENANT_ENABLE)
+  if (import.meta.env.VITE_APP_TENANT_ENABLE === "true") {
     return true;
   }
-  if (import.meta.env.VUE_APP_TENANT_ENABLE === "false") {
+  if (import.meta.env.VITE_APP_TENANT_ENABLE === "false") {
     return false;
   }
-  return import.meta.env.VUE_APP_TENANT_ENABLE || true;
+  return import.meta.env.VITE_APP_TENANT_ENABLE || true;
 }
 
 /**
  * 获得验证码功能是否开启
  */
 export function getCaptchaEnable() {
-  if (import.meta.env.VUE_APP_CAPTCHA_ENABLE === "true") {
+  if (import.meta.env.VITE_APP_CAPTCHA_ENABLE === "true") {
     return true;
   }
-  if (import.meta.env.VUE_APP_CAPTCHA_ENABLE === "false") {
+  if (import.meta.env.VITE_APP_CAPTCHA_ENABLE === "false") {
     return false;
   }
-  return import.meta.env.VUE_APP_CAPTCHA_ENABLE || true;
+  return import.meta.env.VITE_APP_CAPTCHA_ENABLE || true;
 }
 
 /**
  * 获得文档是否开启
  */
 export function getDocEnable() {
-  if (import.meta.env.VUE_APP_DOC_ENABLE === "true") {
+  if (import.meta.env.VITE_APP_DOC_ENABLE === "true") {
     return true;
   }
-  if (import.meta.env.VUE_APP_DOC_ENABLE === "false") {
+  if (import.meta.env.VITE_APP_DOC_ENABLE === "false") {
     return false;
   }
-  return import.meta.env.VUE_APP_DOC_ENABLE || false;
+  return import.meta.env.VITE_APP_DOC_ENABLE || false;
 }
 
 /**
  * 获得 Vue 应用的基础路径
  */
 export function getBasePath() {
-  return import.meta.env.VUE_APP_APP_NAME || '/';
+  return import.meta.env.VITE_APP_APP_NAME || '/';
 }
 
 /**

@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Logo from "@/ui/components/Logo";
 import {
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -14,21 +13,28 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/api/login";
-import { setTenantId as setLocalTenantId, getTenantId, setToken } from "@/utils/auth";
+import { setTenantId as setLocalTenantId, getTenantId } from "@/utils/auth";
+import { LoadingButton } from "@mui/lab";
 
 export default function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const loginSubmit = (formData) => {
+  const loginSubmit = async (formData) => {
+    setLoading(true)
     login(formData.userName, formData.password)
       .then((res) => {
         // setToken(res.data)
         navigate("/index");
+        console.log(res);
       })
       .catch((error) => {
         console.log(error);
+      }).finally(() => {
+        setLoading(false)
       });
   };
+
+  const[loading, setLoading] = useState(false)
 
   const localTenantId = getTenantId() ? getTenantId() : 1;
   setLocalTenantId(localTenantId);
@@ -111,9 +117,9 @@ export default function Login() {
               autoComplete="current-password"
               helperText={errors.password?.message}
             />
-            <Button variant="contained" fullWidth size="large" type="submit">
+            <LoadingButton loading={loading} variant="contained" fullWidth size="large" type="submit">
               {t("登录")}
-            </Button>
+            </LoadingButton>
           </div>
         </div>
       </form>

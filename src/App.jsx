@@ -1,8 +1,10 @@
 import { RouterProvider } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import router from "./routes";
 import LySnackbarProvider from "@/ui/components/LySnackbarProvider";
 import LyConfirmDialog from "@/ui/components/LyConfirmDialog";
+import NProgress from "nprogress";
+NProgress.configure({ showSpinner: false});
 
 function App() {
   useEffect(() => {
