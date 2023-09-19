@@ -1,16 +1,17 @@
+import i18n from "@/i18n/index";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useTranslation } from "react-i18next";
+
 import { createContext, useEffect, useRef, useState } from "react";
 
 const ConfirmDialogContext = createContext();
 
 export default function LyConfirmDialog() {
-  const { t } = useTranslation();
+  const t = i18n.t
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");

@@ -2,13 +2,26 @@ import Header from "./Header";
 import Silder from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
-import { createContext, useReducer } from "react";
-
+import { createContext, useEffect, useReducer } from "react";
 import { LayoutContext, State } from "./LayoutContext";
+import useAuth from "@/hooks/useAuth";
+import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 
 const C = createContext({});
 
 export default function Layout() {
+  const navigate = useNavigate();
+  const { auth } = useAuth();
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(auth);
+    if (!auth.isLogin) {
+      navigate("/");
+    }
+  });
+
   return (
     <>
       <ConfigProvider>

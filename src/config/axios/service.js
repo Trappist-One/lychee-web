@@ -4,13 +4,13 @@ import { getTenantEnable } from "@/utils/lychee";
 import {refreshToken} from "@/api/login";
 import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
-import i18next from "i18next";
 import { confirmDialog } from "@/ui/components/LyConfirmDialog";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { sleep } from "@/utils/dateUtils";
+import i18n from "@/i18n/index";
 
-const t = i18next.t;
+const t = i18n.t;
 
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
 // 是否显示重新登录

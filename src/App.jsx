@@ -4,7 +4,8 @@ import router from "./routes";
 import LySnackbarProvider from "@/ui/components/LySnackbarProvider";
 import LyConfirmDialog from "@/ui/components/LyConfirmDialog";
 import NProgress from "nprogress";
-import Loading from "./ui/components/loading/index";
+import Loading from "@/ui/components/loading/index";
+
 NProgress.configure({ showSpinner: false});
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
       .querySelector("html")
       .setAttribute("data-theme", localStorage.getItem("theme"));
   }, []);
+
+ 
+
 
   return (
     <div className="overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee">
