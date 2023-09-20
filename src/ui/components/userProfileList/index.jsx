@@ -1,3 +1,4 @@
+import { removeToken } from "@/utils/auth";
 import {SettingsAccessibility } from "@mui/icons-material";
 import {
   Box,
@@ -15,7 +16,8 @@ export default function UserProfileList() {
   const { t } = useTranslation();
   const navigaaate = useNavigate()
   const logoutFund = () => {
-    navigaaate('/')
+    navigaaate('/login')
+    removeToken()
   }
   return (
     <Box className=" bg-white shadow-xl">

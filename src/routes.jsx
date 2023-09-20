@@ -18,14 +18,6 @@ const Error = lazy(() => import("@/ui/pages/errors/Error"));
 const routes = [
   {
     path: "/",
-    element: <Login />,
-  },
-  {
-    path: "*",
-    element: <NoFound />,
-  },
-  {
-    path: "/index",
     element: <Layout />,
     errorElement: <Error/>,
     children: [
@@ -42,7 +34,16 @@ const routes = [
         element: <Tab3/>
       }
     ],
-  }
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "*",
+    element: <NoFound />,
+  },
+  
 ];
 
 const router = createBrowserRouter(routes);

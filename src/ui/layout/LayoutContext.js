@@ -35,7 +35,7 @@ const State = {
   tabs: [
     {
       name: "首页",
-      path: "/",
+      path: "/index",
       id: 999,
       parentId: 0
     },

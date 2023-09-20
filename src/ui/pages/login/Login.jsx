@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Logo from "@/ui/components/Logo";
+import Logo from "@/ui/components/logo/index";
 import {
   FormControl,
   InputLabel,
@@ -24,11 +24,12 @@ export default function Login() {
     login(formData.userName, formData.password)
       .then((res) => {
         setToken(res.data)
-        navigate("/index");
+        navigate("/");
       })
       .catch((error) => {
         // https://juejin.cn/post/7277395904217907200?from=search-suggest
         console.log(error);
+        navigate("/login");
       }).finally(() => {
         setLoading(false)
       });
