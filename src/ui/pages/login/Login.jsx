@@ -23,9 +23,8 @@ export default function Login() {
     setLoading(true)
     login(formData.userName, formData.password)
       .then((res) => {
-        // setToken(res.data)
-        navigate("/index");
         setToken(res.data)
+        navigate("/index");
       })
       .catch((error) => {
         // https://juejin.cn/post/7277395904217907200?from=search-suggest

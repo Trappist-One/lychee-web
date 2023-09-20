@@ -4,7 +4,7 @@ import { getTenantEnable } from "@/utils/lychee";
 import {refreshToken} from "@/api/login";
 import errorCode from "@/utils/errorCode";
 import SnackbarUtils from "../snackbar/SnackbarUtils";
-import { confirmDialog } from "@/ui/components/LyConfirmDialog";
+import { confirmDialog } from "@/ui/components/lyConfirmDialog/index";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { sleep } from "@/utils/dateUtils";

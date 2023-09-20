@@ -2,7 +2,7 @@ import { RouterProvider } from "react-router-dom";
 import { Suspense, useEffect } from "react";
 import router from "./routes";
 import LySnackbarProvider from "@/ui/components/LySnackbarProvider";
-import LyConfirmDialog from "@/ui/components/LyConfirmDialog";
+import LyConfirmDialog from "@/ui/components/lyConfirmDialog/index";
 import NProgress from "nprogress";
 import Loading from "@/ui/components/loading/index";
 
