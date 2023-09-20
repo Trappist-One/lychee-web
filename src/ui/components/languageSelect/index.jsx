@@ -1,5 +1,5 @@
 import { MenuItem, Select } from "@mui/material";
-import i18n from "../../i18n";
+import i18n from "@/i18n";
 
 export default function LanguageSelect(prop) {
   const handleChange = (event) => {

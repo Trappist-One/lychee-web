@@ -2,7 +2,7 @@ import { Divider, Drawer } from "@mui/material";
 import { Fragment, useContext } from "react";
 import themes from "@/assets/styles/themes/themes";
 import { C } from "./Layout";
-import LanguageSelect from "@/components/languageSelect/index";
+import LanguageSelect from "@/ui/components/languageSelect";
 import { useTranslation } from "react-i18next";
 // import {t} from 'i18next'
 

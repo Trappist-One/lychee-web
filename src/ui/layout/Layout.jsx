@@ -11,16 +11,16 @@ import { useLocation } from "react-router-dom";
 const C = createContext({});
 
 export default function Layout() {
-  const navigate = useNavigate();
-  const { auth } = useAuth();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const { auth } = useAuth();
+  // const location = useLocation();
 
-  useEffect(() => {
-    console.log(auth);
-    if (!auth.isLogin) {
-      navigate("/");
-    }
-  });
+  // useEffect(() => {
+  //   console.log(auth);
+  //   if (!auth.isLogin) {
+  //     navigate("/");
+  //   }
+  // });
 
   return (
     <>
