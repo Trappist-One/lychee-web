@@ -6,7 +6,7 @@ import LyConfirmDialog from "@/ui/components/lyConfirmDialog/index";
 import NProgress from "nprogress";
 import Loading from "@/ui/components/loading/index";
 
-NProgress.configure({ showSpinner: false});
+NProgress.configure({ showSpinner: false });
 
 function App() {
   useEffect(() => {
@@ -25,15 +25,13 @@ function App() {
       .setAttribute("data-theme", localStorage.getItem("theme"));
   }, []);
 
- 
-
-
   return (
     <div className="overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee">
       <LySnackbarProvider>
-        <LyConfirmDialog/>
-        <Suspense fallback={<Loading />}></Suspense>
+        <LyConfirmDialog />
+        <Suspense fallback={<Loading />}>
           <RouterProvider router={router}></RouterProvider>
+        </Suspense>
       </LySnackbarProvider>
     </div>
   );

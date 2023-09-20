@@ -151,7 +151,7 @@ service.interceptors.response.use(
 function handleAuthorized() {
   if (!isRelogin.show) {
     isRelogin.show = true;
-    confirmDialog.open('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{window.location.href="/index"})
+    confirmDialog.open('系统提示', '登录状态已过期，您可以继续留在该页面，或者重新登录', ()=>{window.location.href="/login"})
   }
   return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
 }

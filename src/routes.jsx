@@ -1,40 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-// import Login from "./ui/pages/login/Login";
 import { lazy } from "react";
+import { getInfo } from "./api/login";
 
-// import Login from "@/ui/pages/login/Login";
-import Layout from "@/ui/layout/Layout";
-
-
-const Login = lazy(() => import("@/ui/pages/login/Login"))
-// const Layout = lazy(() => import("@/ui/layout/Layout"));
+const Login = lazy(() => import("@/ui/pages/login/Login"));
+const Layout = lazy(() => import("@/ui/layout/Layout"));
 const Tab1 = lazy(() => import("@/ui/pages/Tab1"));
 const Tab2 = lazy(() => import("@/ui/pages/Tab2"));
 const Tab3 = lazy(() => import("@/ui/pages/Tab3"));
-const NoFound = lazy(() => import("@/ui/pages/errors/NoFound"));
-const Error = lazy(() => import("@/ui/pages/errors/Error"));
-
+const NoFound = lazy(() => import("@/ui/pages/common/NoFound"));
+const Error = lazy(() => import("@/ui/pages/common/Error"));
 
 const routes = [
-  {
-    path: "/",
-    element: <Layout />,
-    errorElement: <Error/>,
-    children: [
-      {
-        path: 'tab1',
-        element: <Tab1/>
-      },
-      {
-        path: 'tab2',
-        element: <Tab2/>
-      },
-      {
-        path: 'tab3',
-        element: <Tab3/>
-      }
-    ],
-  },
   {
     path: "/login",
     element: <Login />,
@@ -43,7 +19,28 @@ const routes = [
     path: "*",
     element: <NoFound />,
   },
-  
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <Error />,
+    loader: async () => {
+      return getInfo();
+    },
+    children: [
+      {
+        path: "tab1",
+        element: <Tab1 />,
+      },
+      {
+        path: "tab2",
+        element: <Tab2 />,
+      },
+      {
+        path: "tab3",
+        element: <Tab3 />,
+      },
+    ],
+  },
 ];
 
 const router = createBrowserRouter(routes);

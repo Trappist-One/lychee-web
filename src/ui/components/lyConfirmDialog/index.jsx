@@ -26,8 +26,8 @@ export default function LyConfirmDialog() {
 
   const closeDialog = () => {
     setOpen(false);
-    setTitle("");
-    setContent("");
+    // setTitle("");
+    // setContent("");
     setOnConfirm(() => {});
   };
 
@@ -41,8 +41,7 @@ export default function LyConfirmDialog() {
   // 在组件挂载时注册全局确认对话框实例
   useEffect(() => {
     confirmDialogInstanceRef.current = {
-      openDialog: (title, content, onConfirm) => {
-        console.log(onConfirm);
+      open: (title, content, onConfirm) => {
         openDialog(title, content, onConfirm)
       },
     };
@@ -81,5 +80,5 @@ export const confirmDialog = {
 
 // 注册全局确认对话框实例
 const registerConfirmDialogInstance = (instance) => {
-  confirmDialog.open = instance.openDialog;
+  confirmDialog.open = instance.open;
 };
