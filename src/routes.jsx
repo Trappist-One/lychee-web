@@ -2,11 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 // import Login from "./ui/pages/login/Login";
 import { lazy } from "react";
 
-import Login from "@/ui/pages/login/Login";
+// import Login from "@/ui/pages/login/Login";
 import Layout from "@/ui/layout/Layout";
 
 
-// const Login = lazy(() => import("@/ui/pages/login/Login"))
+const Login = lazy(() => import("@/ui/pages/login/Login"))
 // const Layout = lazy(() => import("@/ui/layout/Layout"));
 const Tab1 = lazy(() => import("@/ui/pages/Tab1"));
 const Tab2 = lazy(() => import("@/ui/pages/Tab2"));
