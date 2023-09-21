@@ -1,12 +1,8 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "rootDir": "./",
-        "baseUrl": "./",
-        "jsx": "react",
-        "experimentalDecorators": true,
-        "paths": {"@/*": ["src/*"]}
+        "jsx": "react"
     },
-    "include": ["./src/**/*", "src/servers/.js"],
+    "include": ["./src/**/*"],
     "exclude": ["node_modules", "dist", ".history"]
 }

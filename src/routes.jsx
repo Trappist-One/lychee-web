@@ -25,21 +25,7 @@ const routes = [
     errorElement: <Error />,
     loader: async () => {
       return getInfo();
-    },
-    children: [
-      {
-        path: "tab1",
-        element: <Tab1 />,
-      },
-      {
-        path: "tab2",
-        element: <Tab2 />,
-      },
-      {
-        path: "tab3",
-        element: <Tab3 />,
-      },
-    ],
+    }
   },
 ];
 

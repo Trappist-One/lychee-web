@@ -2,23 +2,14 @@ import Header from "./Header";
 import Silder from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
-import { createContext, useLayoutEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { LayoutContext, State } from "./LayoutContext";
-import { getInfo } from "@/api/login";
-import router from "@/routes";
-import { useLoaderData } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const C = createContext({});
 
 export default function Layout() {
-  const data = useLoaderData()
-  console.log(data);
-  // const navigate = useNavigate();
-  // useLayoutEffect(() => {
-  //   const res = getInfo();
-  //   console.log(res);
-  // })
-
+  const navigate = useNavigate()  
   return (
     <>
       <ConfigProvider>
