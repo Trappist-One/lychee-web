@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { confirmDialog } from "@/ui/components/lyConfirmDialog/index";
+import { confirmDialog } from "@/ui/components/lyConfirmDialog";
 let isLogin = false;
 let hasPrem = true;
 
-export default function AuthRouth() {
+export default function AuthRouth({children}) {
   const navigate = useNavigate();
   useEffect(() => {
     if (!isLogin) {
@@ -21,4 +21,6 @@ export default function AuthRouth() {
       navigate("/noAuth");
     }
   });
+
+  return children;
 }

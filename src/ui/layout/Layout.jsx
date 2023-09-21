@@ -4,12 +4,21 @@ import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
 import { createContext, useEffect, useReducer } from "react";
 import { LayoutContext, State } from "./LayoutContext";
-import { useNavigate } from "react-router";
+import Tab1 from "../pages/Tab1";
+import Tab2 from "../pages/Tab2";
+import Tab3 from "../pages/Tab3";
+import router from "@/config/router/router";
 
 const C = createContext({});
 
 export default function Layout() {
-  const navigate = useNavigate()  
+  const dyRouter = [{path: '/tab1', element: <Tab1/>}, {path: '/tab2', element: <Tab2/>}, {path: '/tab3', element: <Tab3/>}];
+
+  console.log(99999999999);
+  useEffect(() => {
+    console.log(router.routes[0]);
+    router.routes[0].children = dyRouter
+  });
   return (
     <>
       <ConfigProvider>
