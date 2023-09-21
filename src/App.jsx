@@ -1,12 +1,12 @@
 import { RouterProvider } from "react-router-dom";
 import { Suspense, useEffect } from "react";
 import router from "./routes";
-import LySnackbarProvider from "@/ui/components/LySnackbarProvider";
+import LySnackbarProvider from "@/ui/components/lySnackbarProvider/index";
 import LyConfirmDialog from "@/ui/components/lyConfirmDialog/index";
 import NProgress from "nprogress";
 import Loading from "@/ui/components/loading/index";
 
-NProgress.configure({ showSpinner: false });
+NProgress.configure({ showSpinner: false});
 
 function App() {
   useEffect(() => {
@@ -25,13 +25,15 @@ function App() {
       .setAttribute("data-theme", localStorage.getItem("theme"));
   }, []);
 
+ 
+
+
   return (
     <div className="overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee">
       <LySnackbarProvider>
-        <LyConfirmDialog />
-        <Suspense fallback={<Loading />}>
+        <LyConfirmDialog/>
+        <Suspense fallback={<Loading />}></Suspense>
           <RouterProvider router={router}></RouterProvider>
-        </Suspense>
       </LySnackbarProvider>
     </div>
   );
