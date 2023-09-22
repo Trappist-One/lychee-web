@@ -2,24 +2,37 @@ import Header from "./Header";
 import Silder from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import Content from "./Content";
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import { LayoutContext, State } from "./LayoutContext";
-import Tab1 from "../pages/Tab1";
-import Tab2 from "../pages/Tab2";
-import Tab3 from "../pages/Tab3";
-import router from "@/config/router/router";
+import Loading from "@/ui/components/loading/index";
+import { getInfo } from "@/api/login";
+import { setRoutes } from "@/stores/user";
+import Tab1 from "@/ui/pages/Tab1";
+import Tab2 from "@/ui/pages/Tab2";
+import Tab3 from "@/ui/pages/Tab3";
+import router from "../../config/router/router";
+import { useSelector } from "react-redux";
+
 
 const C = createContext({});
 
 export default function Layout() {
-  const dyRouter = [{path: '/tab1', element: <Tab1/>}, {path: '/tab2', element: <Tab2/>}, {path: '/tab3', element: <Tab3/>}];
-
-  console.log(99999999999);
+  const [ready, setReady] = useState(false)
+  const isLogin = useSelector(state => state.userStore.isLogin)
+  console.log(isLogin);
   useEffect(() => {
-    console.log(router.routes[0]);
-    router.routes[0].children = dyRouter
-  });
-  return (
+    getInfo().then(res => {
+      const routes = [{ path: '/tab1', element: <Tab1 /> }, { path: '/tab2', element: <Tab2 /> }, { path: '/tab3', element: <Tab3 /> }];
+      // setRoutes(routes)
+      console.log(router.routes[0].children);
+      // console.log(routesStore);
+      setReady(true)
+    }
+    ).catch(error => console.log(new Error(error)))
+
+  }, []);
+
+  return (!ready ? <Loading /> :
     <>
       <ConfigProvider>
         <div className="h-full flex flex-row">

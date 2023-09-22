@@ -10,7 +10,7 @@ import {
   TbLayoutSidebarRightCollapse,
 } from "react-icons/tb";
 import { useContext, useState } from "react";
-import SettingDrawer from "@/ui/layout/SettingDrawer";
+import SettingDrawer from "@/ui/layout/settingDrawer";
 import UserProfileList from "@/ui/components/userProfileList";
 import screenfull from 'screenfull'
 

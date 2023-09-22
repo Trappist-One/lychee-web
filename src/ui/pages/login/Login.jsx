@@ -15,6 +15,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/api/login";
 import { setTenantId as setLocalTenantId, getTenantId, setToken } from "@/utils/auth";
 import { LoadingButton } from "@mui/lab";
+import router from "@/config/router/router";
+import { useSelector } from "react-redux";
+import { setLogin } from "../../../stores/user";
+
 
 export default function Login() {
   const { t } = useTranslation();
@@ -26,10 +30,9 @@ export default function Login() {
         setToken(res.data)
         navigate("/");
       })
-      .catch((error) => {
-        // https://juejin.cn/post/7277395904217907200?from=search-suggest
-        console.log(error);
+      .catch(error => {
         navigate("/login");
+        console.log(error);
       }).finally(() => {
         setLoading(false)
       });
@@ -59,6 +62,11 @@ export default function Login() {
   } = useForm({
     resolver: yupResolver(validationLoginSchema),
   });
+
+  const routes = useSelector(state => state.userStore.routes)
+  router.routes[0].children = routes
+
+  setLogin(true)
 
   return (
     <div className="flex h-full w-full">

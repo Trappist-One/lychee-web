@@ -1,15 +1,15 @@
 import { RouterProvider } from "react-router-dom";
 import { Suspense, useEffect } from "react";
-import router from "./config/router/router";
+import router from "@/config/router/router";
 import LySnackbarProvider from "@/ui/components/lySnackbarProvider/index";
 import LyConfirmDialog from "@/ui/components/lyConfirmDialog/index";
 import NProgress from "nprogress";
 import Loading from "@/ui/components/loading/index";
-
-NProgress.configure({ showSpinner: false});
+import store from '@/stores/index'
+import { Provider } from 'react-redux'
 
 function App() {
-
+  NProgress.configure({ showSpinner: false });
   useEffect(() => {
     if (localStorage.getItem("theme") === null) {
       if (
@@ -26,16 +26,18 @@ function App() {
       .setAttribute("data-theme", localStorage.getItem("theme"));
   }, []);
 
- 
 
 
   return (
     <div className="overflow-y-scroll no-scrollbar h-screen w-full min-w-full font-lychee">
-      <LySnackbarProvider>
-        <LyConfirmDialog/>
-        <Suspense fallback={<Loading />}></Suspense>
+      <Provider store={store}>
+        <LySnackbarProvider>
+          <LyConfirmDialog />
+          <Suspense fallback={<Loading />}></Suspense>
           <RouterProvider router={router}></RouterProvider>
-      </LySnackbarProvider>
+        </LySnackbarProvider>
+      </Provider>
+
     </div>
   );
 }
