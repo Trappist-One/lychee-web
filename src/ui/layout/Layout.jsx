@@ -6,33 +6,38 @@ import { createContext, useEffect, useReducer, useState } from "react";
 import { LayoutContext, State } from "./LayoutContext";
 import Loading from "@/ui/components/loading/index";
 import { getInfo } from "@/api/login";
-import { setRoutes } from "@/stores/user";
-import Tab1 from "@/ui/pages/Tab1";
-import Tab2 from "@/ui/pages/Tab2";
-import Tab3 from "@/ui/pages/Tab3";
-import router from "../../config/router/router";
-import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { setMenus, setRoles, setUser, setPerms, setRoutes } from "@/config/stores/user";
+import { parseRoutes } from "@/utils/parseInfo";
+import router from "@/config/router/router";
 
 const C = createContext({});
 
 export default function Layout() {
-  const [ready, setReady] = useState(false)
-  const isLogin = useSelector(state => state.userStore.isLogin)
-  console.log(isLogin);
+  const [ready, setReady] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
-    getInfo().then(res => {
-      const routes = [{ path: '/tab1', element: <Tab1 /> }, { path: '/tab2', element: <Tab2 /> }, { path: '/tab3', element: <Tab3 /> }];
-      // setRoutes(routes)
-      console.log(router.routes[0].children);
-      // console.log(routesStore);
-      setReady(true)
-    }
-    ).catch(error => console.log(new Error(error)))
-
+    getInfo()
+      .then((res) => {
+        dispatchInfo(res.data);
+        setReady(true);
+      })
+      .catch((error) => console.log(new Error(error)));
   }, []);
 
-  return (!ready ? <Loading /> :
+  const dispatchInfo = (data) => {
+    dispatch(setMenus(data.menus));
+    dispatch(setRoles(data.roles));
+    dispatch(setUser(data.user));
+    dispatch(setPerms(data.permissions));
+    // dispatch(setRoutes(parseRoutes(data.menus)))
+    router.routes[0].children = parseRoutes(data.menus, data.menus)
+    console.log(router.routes[0].children);
+  };
+
+  return !ready ? (
+    <Loading />
+  ) : (
     <>
       <ConfigProvider>
         <div className="h-full flex flex-row">

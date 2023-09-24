@@ -5,7 +5,7 @@ import LySnackbarProvider from "@/ui/components/lySnackbarProvider/index";
 import LyConfirmDialog from "@/ui/components/lyConfirmDialog/index";
 import NProgress from "nprogress";
 import Loading from "@/ui/components/loading/index";
-import store from '@/stores/index'
+import store from '@/config/stores/index'
 import { Provider } from 'react-redux'
 
 function App() {

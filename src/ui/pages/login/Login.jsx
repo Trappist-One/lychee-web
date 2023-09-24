@@ -16,18 +16,22 @@ import { login } from "@/api/login";
 import { setTenantId as setLocalTenantId, getTenantId, setToken } from "@/utils/auth";
 import { LoadingButton } from "@mui/lab";
 import router from "@/config/router/router";
-import { useSelector } from "react-redux";
-import { setLogin } from "../../../stores/user";
+import { useSelector ,useDispatch } from "react-redux";
+import { setLogin } from "@/config/stores/user";
+import stores from "@/config/stores/index";
 
 
 export default function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
   const loginSubmit = async (formData) => {
     setLoading(true)
     login(formData.userName, formData.password)
       .then((res) => {
         setToken(res.data)
+        dispatch(setLogin(true))
         navigate("/");
       })
       .catch(error => {
@@ -66,7 +70,12 @@ export default function Login() {
   const routes = useSelector(state => state.userStore.routes)
   router.routes[0].children = routes
 
-  setLogin(true)
+
+  stores.subscribe(() => {
+    console.log('subscribe...');
+    router.routes[0].children = stores.getState().routes
+    console.log(stores.getState())
+  })
 
   return (
     <div className="flex h-full w-full">

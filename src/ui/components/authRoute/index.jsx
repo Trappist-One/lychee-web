@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { confirmDialog } from "@/ui/components/lyConfirmDialog";
+import Loading from "../loading/index";
 let isLogin = false;
 let hasPrem = true;
 
-export default function AuthRouth({children}) {
+export default function AuthRouth(props) {
   const navigate = useNavigate();
   useEffect(() => {
     if (!isLogin) {
@@ -22,5 +23,11 @@ export default function AuthRouth({children}) {
     }
   });
 
-  return children;
+  const Compnoent = lazy(() => import(`../pages/${props.component}`));
+
+  console.log(111);
+
+  // return <Suspense fallback={<Loading />}>{compnoent}</Suspense>;
+  return <Compnoent/>
+
 }

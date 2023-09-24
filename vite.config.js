@@ -9,7 +9,7 @@ const root = process.cwd();
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, root, '')
   return {
-    base:'./',
+    base:'/',
     plugins: [react()],
     root: root,
     // 服务端渲染
